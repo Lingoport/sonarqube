@@ -152,24 +152,6 @@ public class EsInstallationTest {
   }
 
   @Test
-  public void getExecutable_resolve_executable_for_platform() throws IOException {
-    File sqHomeDir = temp.newFolder();
-    Props props = new Props(new Properties());
-    props.set(PATH_DATA.getKey(), temp.newFolder().getAbsolutePath());
-    props.set(PATH_HOME.getKey(), sqHomeDir.getAbsolutePath());
-    props.set(PATH_TEMP.getKey(), temp.newFolder().getAbsolutePath());
-    props.set(PATH_LOGS.getKey(), temp.newFolder().getAbsolutePath());
-
-    EsInstallation underTest = new EsInstallationImpl(props);
-
-    if (System.getProperty("os.name").startsWith("Windows")) {
-      assertThat(underTest.getExecutable()).isEqualTo(new File(sqHomeDir, "elasticsearch/bin/elasticsearch.bat"));
-    } else {
-      assertThat(underTest.getExecutable()).isEqualTo(new File(sqHomeDir, "elasticsearch/bin/elasticsearch"));
-    }
-  }
-
-  @Test
   public void getLog4j2Properties_is_in_es_conf_directory() throws IOException {
     File tempDir = temp.newFolder();
     Props props = new Props(new Properties());
