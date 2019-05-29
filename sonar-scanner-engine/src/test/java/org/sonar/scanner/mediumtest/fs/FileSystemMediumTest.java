@@ -798,25 +798,6 @@ public class FileSystemMediumTest {
     assertThat(result.inputFiles()).extractingResultOf("path").toString().startsWith(projectDir.toString());
   }
 
-  // SONAR-6719
-  @Test
-  public void scanProjectWithWrongCase() {
-    // To please the quality gate, don't use assumeTrue, or the test will be reported as skipped
-    if (System2.INSTANCE.isOsWindows()) {
-      File projectDir = new File("test-resources/mediumtest/xoo/sample");
-      AnalysisResult result = tester
-        .newAnalysis(new File(projectDir, "sonar-project.properties"))
-        .property("sonar.sources", "XOURCES")
-        .property("sonar.tests", "TESTX")
-        .execute();
-
-      assertThat(result.inputFiles()).hasSize(3);
-      assertThat(result.inputFiles()).extractingResultOf("relativePath").containsOnly(
-        "xources/hello/HelloJava.xoo",
-        "xources/hello/helloscala.xoo",
-        "testx/ClassOneTest.xoo");
-    }
-  }
 
   @Test
   public void indexAnyFile() throws IOException {
