@@ -98,8 +98,7 @@ export class OverviewApp extends React.PureComponent<Props, State> {
 
   isEmpty = () => {
     return (
-      this.state.measures === undefined ||
-      this.state.measures.find(measure => measure.metric.key === 'ncloc') === undefined
+      this.state.measures === undefined
     );
   };
 
