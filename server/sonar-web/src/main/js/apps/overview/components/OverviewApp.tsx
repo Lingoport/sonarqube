@@ -165,7 +165,7 @@ export class OverviewApp extends React.PureComponent<Props, State> {
         <h3>
           {!this.state.measures ||
           !this.state.measures.find(measure => measure.metric.key === 'projects')
-            ? translate(isApp ? 'portfolio.app.empty' : 'overview.project.empty')
+            ? translate(isApp ? 'overview.project.empty' : 'overview.project.empty')
             : translate(
                 isApp ? 'portfolio.app.no_lines_of_code' : 'overview.project.no_lines_of_code'
               )}
