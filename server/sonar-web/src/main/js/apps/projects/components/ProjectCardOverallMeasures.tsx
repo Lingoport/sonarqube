@@ -20,14 +20,8 @@
 import * as React from 'react';
 import ProjectCardLanguagesContainer from './ProjectCardLanguagesContainer';
 import Measure from '../../../components/measure/Measure';
-import Rating from '../../../components/ui/Rating';
 import CoverageRating from '../../../components/ui/CoverageRating';
-import DuplicationsRating from '../../../components/ui/DuplicationsRating';
 import SizeRating from '../../../components/ui/SizeRating';
-import { translate } from '../../../helpers/l10n';
-import BugIcon from '../../../components/icons-components/BugIcon';
-import CodeSmellIcon from '../../../components/icons-components/CodeSmellIcon';
-import VulnerabilityIcon from '../../../components/icons-components/VulnerabilityIcon';
 
 interface Props {
   measures: T.Dict<string | undefined>;
@@ -38,7 +32,7 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
     return null;
   }
 
-  const { ncloc } = measures;
+ // const { ncloc } = measures;
 
   return (
     <div className="project-card-measures">
@@ -49,13 +43,11 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
               className="spacer-right"
               metricKey="bugs"
               metricType="SHORT_INT"
-              value={measures['bugs']}
+              value={measures.key}
             />
-            <Rating value={measures['reliability_rating']} />
           </div>
           <div className="project-card-measure-label-with-icon">
-            <BugIcon className="little-spacer-right vertical-bottom" />
-            {translate('metric.bugs.name')}
+            GLOBALYZER ISSUES
           </div>
         </div>
       </div>
@@ -69,11 +61,9 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
               metricType="SHORT_INT"
               value={measures['vulnerabilities']}
             />
-            <Rating value={measures['security_rating']} />
           </div>
           <div className="project-card-measure-label-with-icon">
-            <VulnerabilityIcon className="little-spacer-right vertical-bottom" />
-            {translate('metric.vulnerabilities.name')}
+            GLOBALYZER RCI
           </div>
         </div>
       </div>
@@ -87,11 +77,9 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
               metricType="SHORT_INT"
               value={measures['code_smells']}
             />
-            <Rating value={measures['sqale_rating']} />
           </div>
           <div className="project-card-measure-label-with-icon">
-            <CodeSmellIcon className="little-spacer-right vertical-bottom" />
-            {translate('metric.code_smells.name')}
+            LRM AVG COMPLETE
           </div>
         </div>
       </div>
@@ -106,29 +94,10 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
             )}
             <Measure metricKey="coverage" metricType="PERCENT" value={measures['coverage']} />
           </div>
-          <div className="project-card-measure-label">{translate('metric.coverage.name')}</div>
+          <div className="project-card-measure-label">REMEDIATION</div>
         </div>
       </div>
 
-      <div className="project-card-measure" data-key="duplicated_lines_density">
-        <div className="project-card-measure-inner">
-          <div className="project-card-measure-number">
-            {measures['duplicated_lines_density'] != null && (
-              <span className="spacer-right">
-                <DuplicationsRating value={Number(measures['duplicated_lines_density'])} />
-              </span>
-            )}
-            <Measure
-              metricKey="duplicated_lines_density"
-              metricType="PERCENT"
-              value={measures['duplicated_lines_density']}
-            />
-          </div>
-          <div className="project-card-measure-label">
-            {translate('metric.duplicated_lines_density.short_name')}
-          </div>
-        </div>
-      </div>
 
       {measures['ncloc'] != null && (
         <div className="project-card-measure project-card-ncloc" data-key="ncloc">
