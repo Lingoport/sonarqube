@@ -18,10 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 import * as React from 'react';
-import ProjectCardLanguagesContainer from './ProjectCardLanguagesContainer';
-import Measure from '../../../components/measure/Measure';
-import SizeRating from '../../../components/ui/SizeRating';
 import {Project} from "../types";
+import {findScans} from "../utils";
 
 interface Props {
   measures: Project;
@@ -40,7 +38,7 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
             <span className="spacer-right">
-              {measures.key}
+              {findScans(measures)}
             </span>
           </div>
           <div className="project-card-measure-label-with-icon">
@@ -53,7 +51,7 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
             <span className="spacer-right">
-              {measures.key}
+              '-'
             </span>
           </div>
           <div className="project-card-measure-label-with-icon">
@@ -66,7 +64,7 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
              <span className="spacer-right">
-              {measures.key}
+              '-'
             </span>
           </div>
           <div className="project-card-measure-label-with-icon">
@@ -78,34 +76,14 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
       <div className="project-card-measure" data-key="coverage">
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
-
             <span className="spacer-right">
-              {measures.key}
+              '-'
             </span>
           </div>
           <div className="project-card-measure-label">REMEDIATION</div>
         </div>
       </div>
 
-
-      {measures != null && (
-        <div className="project-card-measure project-card-ncloc" data-key="ncloc">
-          <div className="project-card-measure-inner pull-right">
-            <div className="project-card-measure-number">
-              <Measure metricKey="ncloc" metricType="SHORT_INT" value='0' />
-              <span className="spacer-left">
-                <SizeRating value={null} />
-              </span>
-            </div>
-            <div className="project-card-measure-label">
-              <ProjectCardLanguagesContainer
-                className="project-card-languages"
-                distribution='-'
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

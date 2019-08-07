@@ -25,6 +25,9 @@ import { getOrganizations } from '../../api/organizations';
 import { searchProjects, Facet } from '../../api/components';
 import { getMeasuresForProjects } from '../../api/measures';
 import { isDiffMetric, getPeriodValue } from '../../helpers/measures';
+import { getJSON } from '../../helpers/request';
+import { Project } from './types';
+
 
 interface SortingOption {
   class?: string;
@@ -389,4 +392,55 @@ export function formatDuration(ms: number) {
     { value: hours, label: 'duration.hours' },
     { value: minutes, label: 'duration.minutes' }
   ]);
+}
+
+export function findScans(project: Project) {
+
+
+  return getJSON('/api/measures/search_history', {
+    component: project.key,
+    metrics: "lngprt-gyzr-scan-line-count,lngprt-gyzr-scan-rule-set-name,lngprt-gyzr-scan-local-ruleset,lngprt-gyzr-scan-violation-count,lngprt-gyzr-scan-file-count,lngprt-gyzr-scan-scan-name,lngprt-gyzr-scan-machine-learning",
+    ps: 1000
+  }).then(function (responseMetrics) {
+    var data = [];
+    var numberOfVersions = 0;
+
+        let result = {
+          Scan: "",
+          RuleSet: "",
+          Issues: "0", Lines: "0", Files: "0"
+
+        };
+        const numberOfMeasuresRetrieved = 7;
+
+        for (let k = 0; k < numberOfMeasuresRetrieved; k++) {
+          for (let d = 0; d < responseMetrics.measures[k].history.length; d++) {
+              if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-line-count") {
+                result.Lines = responseMetrics.measures[k].history[d].value;
+              } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-rule-set-name") {
+                result.RuleSet = responseMetrics.measures[k].history[d].value;
+              } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-local-ruleset") {
+                if (responseMetrics.measures[k].history[d].value === "0")
+                  result.RuleSet = result.RuleSet + "(Remote)";
+                else {
+                  result.RuleSet = result.RuleSet + "(Local)";
+                }
+              } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-violation-count") {
+                result.Issues = responseMetrics.measures[k].history[d].value;
+              } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-file-count") {
+                result.Files = responseMetrics.measures[k].history[d].value;
+              } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-scan-name") {
+                result.Scan = responseMetrics.measures[k].history[d].value;
+              } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-machine-learning") {
+                //  result.bugs = responseMetrics.measures[k].history[d].value;
+              }
+
+          }
+        }
+
+        data[numberOfVersions] = result;
+        numberOfVersions++;
+
+    return data;
+  });
 }
