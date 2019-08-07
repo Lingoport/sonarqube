@@ -86,7 +86,7 @@ export default function ProjectCardOverall({ height, organization, project }: Pr
 
       {project.analysisDate ? (
         <div className="boxed-group-inner">
-          {<ProjectCardOverallMeasures measures={measures} />}
+          {<ProjectCardOverallMeasures measures={project} />}
         </div>
       ) : (
         <div className="boxed-group-inner">

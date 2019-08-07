@@ -20,11 +20,11 @@
 import * as React from 'react';
 import ProjectCardLanguagesContainer from './ProjectCardLanguagesContainer';
 import Measure from '../../../components/measure/Measure';
-import CoverageRating from '../../../components/ui/CoverageRating';
 import SizeRating from '../../../components/ui/SizeRating';
+import {Project} from "../types";
 
 interface Props {
-  measures: T.Dict<string | undefined>;
+  measures: Project;
 }
 
 export default function ProjectCardOverallMeasures({ measures }: Props) {
@@ -39,12 +39,9 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
       <div className="project-card-measure" data-key="reliability_rating">
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
-            <Measure
-              className="spacer-right"
-              metricKey="bugs"
-              metricType="SHORT_INT"
-              value={measures.key}
-            />
+            <span className="spacer-right">
+              {measures.key}
+            </span>
           </div>
           <div className="project-card-measure-label-with-icon">
             GLOBALYZER ISSUES
@@ -55,12 +52,9 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
       <div className="project-card-measure" data-key="security_rating">
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
-            <Measure
-              className="spacer-right"
-              metricKey="vulnerabilities"
-              metricType="SHORT_INT"
-              value={measures['vulnerabilities']}
-            />
+            <span className="spacer-right">
+              {measures.key}
+            </span>
           </div>
           <div className="project-card-measure-label-with-icon">
             GLOBALYZER RCI
@@ -71,12 +65,9 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
       <div className="project-card-measure" data-key="sqale_rating">
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
-            <Measure
-              className="spacer-right"
-              metricKey="code_smells"
-              metricType="SHORT_INT"
-              value={measures['code_smells']}
-            />
+             <span className="spacer-right">
+              {measures.key}
+            </span>
           </div>
           <div className="project-card-measure-label-with-icon">
             LRM AVG COMPLETE
@@ -87,31 +78,29 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
       <div className="project-card-measure" data-key="coverage">
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
-            {measures['coverage'] != null && (
-              <span className="spacer-right">
-                <CoverageRating value={measures['coverage']} />
-              </span>
-            )}
-            <Measure metricKey="coverage" metricType="PERCENT" value={measures['coverage']} />
+
+            <span className="spacer-right">
+              {measures.key}
+            </span>
           </div>
           <div className="project-card-measure-label">REMEDIATION</div>
         </div>
       </div>
 
 
-      {measures['ncloc'] != null && (
+      {measures != null && (
         <div className="project-card-measure project-card-ncloc" data-key="ncloc">
           <div className="project-card-measure-inner pull-right">
             <div className="project-card-measure-number">
-              <Measure metricKey="ncloc" metricType="SHORT_INT" value={measures['ncloc']} />
+              <Measure metricKey="ncloc" metricType="SHORT_INT" value='0' />
               <span className="spacer-left">
-                <SizeRating value={Number(measures['ncloc'])} />
+                <SizeRating value={null} />
               </span>
             </div>
             <div className="project-card-measure-label">
               <ProjectCardLanguagesContainer
                 className="project-card-languages"
-                distribution={measures['ncloc_language_distribution']}
+                distribution='-'
               />
             </div>
           </div>
