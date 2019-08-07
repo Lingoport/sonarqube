@@ -438,26 +438,26 @@ export function findScans(project: Project) {
   });
 }
 
-export function findgzissues(project: Project) {
-
-  return getJSON('/api/measures/search_history', {
-    component: project.key,
-    metrics: "lngprt-gyzr-scan-file-count",
-    ps: 1000
-  }).then(function (responseMetrics) {
-
-    let result = {
-       issues: "1"
-
-    };
+export function findgzissues(projects: Project[]) {
+  const gzdata = [];
+  let result = {
+    issues: "1"
+  };
+  for (let i = 0; i < projects.length; i++){
+    getJSON('/api/measures/search_history', {
+      component: projects[i].key,
+      metrics: "lngprt-gyzr-scan-file-count",
+      ps: 1000
+    }).then(function (responseMetrics) {
       for (let d = 0; d < responseMetrics.measures[0].history.length; d++) {
         if (responseMetrics.measures[0].metric === "lngprt-gyzr-scan-file-count") {
           result.issues = responseMetrics.measures[0].history[d].value;
         }
-
       }
-    return result.issues;
-  });
+    });
+    gzdata[i] = result.issues;
+  }
+  return gzdata;
 }
 
 export function findgzrci(project: Project) {
