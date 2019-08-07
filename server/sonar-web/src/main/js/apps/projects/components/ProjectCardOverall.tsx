@@ -34,9 +34,10 @@ interface Props {
   height: number;
   organization: T.Organization | undefined;
   project: Project;
+  lrm: any;
 }
 
-export default function ProjectCardOverall({ height, organization, project }: Props) {
+export default function ProjectCardOverall({ height, organization, project, lrm }: Props) {
   const { measures } = project;
 
   const hasTags = project.tags.length > 0;
@@ -86,7 +87,7 @@ export default function ProjectCardOverall({ height, organization, project }: Pr
 
       {project.analysisDate ? (
         <div className="boxed-group-inner">
-          {<ProjectCardOverallMeasures measures={project} />}
+          {<ProjectCardOverallMeasures measures={project} lrm ={lrm} />}
         </div>
       ) : (
         <div className="boxed-group-inner">

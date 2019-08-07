@@ -19,13 +19,14 @@
  */
 import * as React from 'react';
 import {Project} from "../types";
-import {findScans} from "../utils";
 
 interface Props {
   measures: Project;
+  lrm: any;
 }
 
-export default function ProjectCardOverallMeasures({ measures }: Props) {
+export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
+
   if (measures === undefined) {
     return null;
   }
@@ -38,7 +39,7 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
             <span className="spacer-right">
-              {findScans(measures)}
+              {lrm}
             </span>
           </div>
           <div className="project-card-measure-label-with-icon">

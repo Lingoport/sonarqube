@@ -396,14 +396,11 @@ export function formatDuration(ms: number) {
 
 export function findScans(project: Project) {
 
-
   return getJSON('/api/measures/search_history', {
     component: project.key,
     metrics: "lngprt-gyzr-scan-line-count,lngprt-gyzr-scan-rule-set-name,lngprt-gyzr-scan-local-ruleset,lngprt-gyzr-scan-violation-count,lngprt-gyzr-scan-file-count,lngprt-gyzr-scan-scan-name,lngprt-gyzr-scan-machine-learning",
     ps: 1000
   }).then(function (responseMetrics) {
-    var data = [];
-    var numberOfVersions = 0;
 
         let result = {
           Scan: "",
@@ -437,10 +434,72 @@ export function findScans(project: Project) {
 
           }
         }
+    return result.Files;
+  });
+}
 
-        data[numberOfVersions] = result;
-        numberOfVersions++;
+export function findgzissues(project: Project) {
 
-    return data;
+  return getJSON('/api/measures/search_history', {
+    component: project.key,
+    metrics: "lngprt-gyzr-scan-file-count",
+    ps: 1000
+  }).then(function (responseMetrics) {
+
+    let result = {
+       issues: "1"
+
+    };
+      for (let d = 0; d < responseMetrics.measures[0].history.length; d++) {
+        if (responseMetrics.measures[0].metric === "lngprt-gyzr-scan-file-count") {
+          result.issues = responseMetrics.measures[0].history[d].value;
+        }
+
+      }
+    return result.issues;
+  });
+}
+
+export function findgzrci(project: Project) {
+
+  return getJSON('/api/measures/search_history', {
+    component: project.key,
+    metrics: "lngprt-gyzr-violations-rci",
+    ps: 1000
+  }).then(function (responseMetrics) {
+
+    let result = {
+      rci: "1"
+
+    };
+    for (let d = 0; d < responseMetrics.measures[0].history.length; d++) {
+      if (responseMetrics.measures[0].metric === "lngprt-gyzr-violations-rci") {
+        result.rci = responseMetrics.measures[0].history[d].value;
+      }
+
+    }
+    return result.rci;
+  });
+}
+
+export function findlrm(project: Project) {
+
+  return getJSON('/api/measures/search_history', {
+    component: project.key,
+    metrics: "lngprt-lrm-status-avg-completion-percent",
+    ps: 1000
+  }).then(function (responseMetrics) {
+
+    let result = {
+      rci: "1"
+
+    };
+    for (let d = 0; d < responseMetrics.measures[0].history.length; d++) {
+      if (responseMetrics.measures[0].metric === "lngprt-lrm-status-avg-completion-percent") {
+        result.rci = responseMetrics.measures[0].history[d].value;
+      }
+
+    }
+    return result.rci;
   });
 }

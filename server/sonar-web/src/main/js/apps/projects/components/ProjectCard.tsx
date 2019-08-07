@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 import * as React from 'react';
-import ProjectCardLeak from './ProjectCardLeak';
 import ProjectCardOverall from './ProjectCardOverall';
 import { Project } from '../types';
 
@@ -26,12 +25,11 @@ interface Props {
   height: number;
   organization: T.Organization | undefined;
   project: Project;
+  lrm : any;
   type?: string;
 }
 
 export default function ProjectCard(props: Props) {
-  if (props.type === 'leak') {
-    return <ProjectCardLeak {...props} />;
-  }
+
   return <ProjectCardOverall {...props} />;
 }

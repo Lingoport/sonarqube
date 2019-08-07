@@ -29,6 +29,7 @@ import EmptySearch from '../../../components/common/EmptySearch';
 import { Project } from '../types';
 import { Query } from '../query';
 import { OnboardingContext } from '../../../app/components/OnboardingContext';
+import {findgzissues} from "../utils";
 
 interface Props {
   cardType?: string;
@@ -41,6 +42,19 @@ interface Props {
 }
 
 export default class ProjectsList extends React.PureComponent<Props> {
+  state = {
+    data: ''
+  };
+
+  componentDidMount() {
+    findgzissues(this.props.projects[0]).then(
+        (valuesReturnedByAPI) => {
+          this.setState({
+            data: valuesReturnedByAPI
+          });
+        }
+    );
+  }
   getCardHeight = () => {
     return this.props.cardType === 'leak' ? 159 : 143;
   };
@@ -72,6 +86,7 @@ export default class ProjectsList extends React.PureComponent<Props> {
   renderRow = ({ index, key, style }: ListRowProps) => {
     const project = this.props.projects[index];
     const height = this.getCardHeight();
+    const lrm = this.state.data;
     return (
       <div key={key} style={{ ...style, height }}>
         <ProjectCard
@@ -79,6 +94,7 @@ export default class ProjectsList extends React.PureComponent<Props> {
           key={project.key}
           organization={this.props.organization}
           project={project}
+          lrm = {lrm}
           type={this.props.cardType}
         />
       </div>
@@ -113,6 +129,7 @@ export default class ProjectsList extends React.PureComponent<Props> {
       </WindowScroller>
     );
   }
+
 
   render() {
     const { projects } = this.props;
