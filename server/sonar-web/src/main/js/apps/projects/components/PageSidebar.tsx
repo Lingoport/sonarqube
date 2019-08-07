@@ -22,19 +22,7 @@ import { flatMap } from 'lodash';
 import FavoriteFilterContainer from './FavoriteFilterContainer';
 import ClearAll from './ClearAll';
 import LanguagesFilterContainer from '../filters/LanguagesFilterContainer';
-import CoverageFilter from '../filters/CoverageFilter';
-import DuplicationsFilter from '../filters/DuplicationsFilter';
-import MaintainabilityFilter from '../filters/MaintainabilityFilter';
-import NewCoverageFilter from '../filters/NewCoverageFilter';
-import NewDuplicationsFilter from '../filters/NewDuplicationsFilter';
-import NewMaintainabilityFilter from '../filters/NewMaintainabilityFilter';
-import NewReliabilityFilter from '../filters/NewReliabilityFilter';
-import NewSecurityFilter from '../filters/NewSecurityFilter';
-import NewLinesFilter from '../filters/NewLinesFilter';
 import QualityGateFilter from '../filters/QualityGateFilter';
-import ReliabilityFilter from '../filters/ReliabilityFilter';
-import SecurityFilter from '../filters/SecurityFilter';
-import SizeFilter from '../filters/SizeFilter';
 import TagsFilter from '../filters/TagsFilter';
 import { translate } from '../../../helpers/l10n';
 import { RawQuery } from '../../../helpers/query';
@@ -55,7 +43,6 @@ interface Props {
 export default function PageSidebar(props: Props) {
   const { facets, onQueryChange, query, organization, view, visualization } = props;
   const isFiltered = hasFilterParams(query);
-  const isLeakView = view === 'leak';
   const maxFacetValue = getMaxFacetValue(facets);
   const facetProps = { onQueryChange, maxFacetValue, organization, query };
 
@@ -70,9 +57,8 @@ export default function PageSidebar(props: Props) {
 
   return (
     <div>
-      {props.showFavoriteFilter && (
+
         <FavoriteFilterContainer organization={organization} query={linkQuery} />
-      )}
 
       <div className="projects-facets-header clearfix">
         {isFiltered && <ClearAll onClearAll={props.onClearAll} />}
@@ -80,70 +66,8 @@ export default function PageSidebar(props: Props) {
         <h3>{translate('filters')}</h3>
       </div>
       <QualityGateFilter {...facetProps} facet={getFacet(facets, 'gate')} value={query.gate} />
-      {!isLeakView && (
-        <>
-          <ReliabilityFilter
-            {...facetProps}
-            facet={getFacet(facets, 'reliability')}
-            value={query.reliability}
-          />
-          <SecurityFilter
-            {...facetProps}
-            facet={getFacet(facets, 'security')}
-            value={query.security}
-          />
-          <MaintainabilityFilter
-            {...facetProps}
-            facet={getFacet(facets, 'maintainability')}
-            value={query.maintainability}
-          />
-          <CoverageFilter
-            {...facetProps}
-            facet={getFacet(facets, 'coverage')}
-            value={query.coverage}
-          />
-          <DuplicationsFilter
-            {...facetProps}
-            facet={getFacet(facets, 'duplications')}
-            value={query.duplications}
-          />
-          <SizeFilter {...facetProps} facet={getFacet(facets, 'size')} value={query.size} />
-        </>
-      )}
-      {isLeakView && (
-        <>
-          <NewReliabilityFilter
-            {...facetProps}
-            facet={getFacet(facets, 'new_reliability')}
-            value={query.new_reliability}
-          />
-          <NewSecurityFilter
-            {...facetProps}
-            facet={getFacet(facets, 'new_security')}
-            value={query.new_security}
-          />
-          <NewMaintainabilityFilter
-            {...facetProps}
-            facet={getFacet(facets, 'new_maintainability')}
-            value={query.new_maintainability}
-          />
-          <NewCoverageFilter
-            {...facetProps}
-            facet={getFacet(facets, 'new_coverage')}
-            value={query.new_coverage}
-          />
-          <NewDuplicationsFilter
-            {...facetProps}
-            facet={getFacet(facets, 'new_duplications')}
-            value={query.new_duplications}
-          />
-          <NewLinesFilter
-            {...facetProps}
-            facet={getFacet(facets, 'new_lines')}
-            value={query.new_lines}
-          />
-        </>
-      )}
+
+
       <LanguagesFilterContainer
         {...facetProps}
         facet={getFacet(facets, 'languages')}
