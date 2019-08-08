@@ -21,13 +21,14 @@ import * as React from 'react';
 import { flatMap } from 'lodash';
 import FavoriteFilterContainer from './FavoriteFilterContainer';
 import ClearAll from './ClearAll';
-import LanguagesFilterContainer from '../filters/LanguagesFilterContainer';
 import QualityGateFilter from '../filters/QualityGateFilter';
 import TagsFilter from '../filters/TagsFilter';
 import { translate } from '../../../helpers/l10n';
 import { RawQuery } from '../../../helpers/query';
 import { Facets } from '../types';
 import { hasFilterParams } from '../query';
+import ReliabilityFilter from "../filters/ReliabilityFilter";
+import SizeFilter from "../filters/SizeFilter";
 
 interface Props {
   facets?: Facets;
@@ -66,13 +67,13 @@ export default function PageSidebar(props: Props) {
         <h3>{translate('filters')}</h3>
       </div>
       <QualityGateFilter {...facetProps} facet={getFacet(facets, 'gate')} value={query.gate} />
+        <SizeFilter {...facetProps} facet={getFacet(facets, 'size')} value={query.size} />
 
-
-      <LanguagesFilterContainer
-        {...facetProps}
-        facet={getFacet(facets, 'languages')}
-        value={query.languages}
-      />
+        <ReliabilityFilter
+            {...facetProps}
+            facet={getFacet(facets, 'reliability')}
+            value={query.reliability}
+        />
       <TagsFilter {...facetProps} facet={getFacet(facets, 'tags')} value={query.tags} />
     </div>
   );

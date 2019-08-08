@@ -48,6 +48,10 @@ export default function GlobalFooter({
 
   return (
     <div className="page-footer page-container" id="footer">
+     <ul>
+      <li><a href="/public/help.html" target="top">Help on Lingoport Dashboard 7.8.1</a></li>
+     </ul>
+
       {productionDatabase === false && (
         <Alert display="inline" id="evaluation_warning" variant="warning">
           <p className="big">{translate('footer.production_database_warning')}</p>
