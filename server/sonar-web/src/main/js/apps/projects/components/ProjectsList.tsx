@@ -65,25 +65,28 @@ export default class ProjectsList extends React.PureComponent<Props> {
 
 
   findgzissues(project: Project) {
-
     return getJSON('/api/measures/search_history', {
       component: project.key,
       metrics: "lngprt-gyzr-scan-file-count,lngprt-gyzr-violations-rci,lngprt-lrm-status-avg-completion-percent,reliability_remediation_effort",
       ps: 1000
     }).then(function (responseMetrics) {
       let result = {
-        issues: "1",
-        rci: "2",
-        comp: "3",
-        rem: "4"
+        issues: "-",
+        rci: "-",
+        comp: "-",
+        rem: "-"
       };
       const numberOfMeasuresRetrieved = 4;
       for (let k = 0; k < numberOfMeasuresRetrieved; k++) {
         for (let d = 0; d < responseMetrics.measures[k].history.length; d++) {
           if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-file-count") {
             result.issues = responseMetrics.measures[k].history[d].value;
+            if(result.issues.length<1)
+              result.issues = '-';
           } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-violations-rci") {
             result.rci = responseMetrics.measures[k].history[d].value;
+            if(result.rci.length<1)
+              result.rci = '-';
           } else if (responseMetrics.measures[k].metric === "lngprt-lrm-status-avg-completion-percent") {
             result.comp = responseMetrics.measures[k].history[d].value;
           } else if (responseMetrics.measures[k].metric === "reliability_remediation_effort") {
@@ -91,14 +94,11 @@ export default class ProjectsList extends React.PureComponent<Props> {
           }
         }
       }
-
       return result;
     });
   }
 
   getgz = async(projects: Project[]|undefined) =>{
-  //  getgz (projects: Project[]|undefined){
-
     var gzdata =[];
     if(projects===undefined)
       return null;

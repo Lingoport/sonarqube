@@ -34,19 +34,21 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
  // const { ncloc } = measures;
   if(lrm ===undefined){
     lrm={
-      issues: "9",
-      rci: "8",
-      comp: "7",
-      rem: "6"
+      issues: "-",
+      rci: "-",
+      comp: "-",
+      rem: "-"
     }
   }
+  let link = 'project/extension/lingoport/globalyzer_page?id='+measures.key+'&qualifier=TRK'
+  let lrm_link = 'project/extension/lingoport/lrm_page?id='+measures.key+'&qualifier=TRK'
   return (
     <div className="project-card-measures">
       <div className="project-card-measure" data-key="reliability_rating">
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
             <span className="spacer-right">
-              {lrm.issues}
+              <a href ={link}>{lrm.issues}</a>
             </span>
           </div>
           <div className="project-card-measure-label-with-icon">
@@ -59,7 +61,7 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
             <span className="spacer-right">
-              {lrm.rci}%
+              <a href ={link}>{lrm.rci}%</a>
             </span>
           </div>
           <div className="project-card-measure-label-with-icon">
@@ -72,7 +74,7 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
              <span className="spacer-right">
-              {lrm.comp}%
+              <a href ={lrm_link}>{lrm.comp}%</a>
             </span>
           </div>
           <div className="project-card-measure-label-with-icon">
@@ -85,7 +87,7 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
             <span className="spacer-right">
-              {lrm.rem}
+              {lrm.rem}d
             </span>
           </div>
           <div className="project-card-measure-label">REMEDIATION</div>
