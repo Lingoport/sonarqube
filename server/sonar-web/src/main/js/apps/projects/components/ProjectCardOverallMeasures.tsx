@@ -32,14 +32,21 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
   }
 
  // const { ncloc } = measures;
-
+  if(lrm ===undefined){
+    lrm={
+      issues: "9",
+      rci: "8",
+      comp: "7",
+      rem: "6"
+    }
+  }
   return (
     <div className="project-card-measures">
       <div className="project-card-measure" data-key="reliability_rating">
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
             <span className="spacer-right">
-              {lrm}
+              {lrm.issues}
             </span>
           </div>
           <div className="project-card-measure-label-with-icon">
@@ -52,7 +59,7 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
             <span className="spacer-right">
-              '-'
+              {lrm.rci}
             </span>
           </div>
           <div className="project-card-measure-label-with-icon">
@@ -65,7 +72,7 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
              <span className="spacer-right">
-              '-'
+              {lrm.comp}
             </span>
           </div>
           <div className="project-card-measure-label-with-icon">
@@ -78,7 +85,7 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
             <span className="spacer-right">
-              '-'
+              {lrm.rem}
             </span>
           </div>
           <div className="project-card-measure-label">REMEDIATION</div>

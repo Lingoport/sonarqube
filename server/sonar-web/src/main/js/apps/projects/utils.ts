@@ -394,112 +394,67 @@ export function formatDuration(ms: number) {
   ]);
 }
 
-export function findScans(project: Project) {
-
-  return getJSON('/api/measures/search_history', {
-    component: project.key,
-    metrics: "lngprt-gyzr-scan-line-count,lngprt-gyzr-scan-rule-set-name,lngprt-gyzr-scan-local-ruleset,lngprt-gyzr-scan-violation-count,lngprt-gyzr-scan-file-count,lngprt-gyzr-scan-scan-name,lngprt-gyzr-scan-machine-learning",
-    ps: 1000
-  }).then(function (responseMetrics) {
-
-        let result = {
-          Scan: "",
-          RuleSet: "",
-          Issues: "0", Lines: "0", Files: "0"
-
-        };
-        const numberOfMeasuresRetrieved = 7;
-
-        for (let k = 0; k < numberOfMeasuresRetrieved; k++) {
-          for (let d = 0; d < responseMetrics.measures[k].history.length; d++) {
-              if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-line-count") {
-                result.Lines = responseMetrics.measures[k].history[d].value;
-              } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-rule-set-name") {
-                result.RuleSet = responseMetrics.measures[k].history[d].value;
-              } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-local-ruleset") {
-                if (responseMetrics.measures[k].history[d].value === "0")
-                  result.RuleSet = result.RuleSet + "(Remote)";
-                else {
-                  result.RuleSet = result.RuleSet + "(Local)";
-                }
-              } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-violation-count") {
-                result.Issues = responseMetrics.measures[k].history[d].value;
-              } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-file-count") {
-                result.Files = responseMetrics.measures[k].history[d].value;
-              } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-scan-name") {
-                result.Scan = responseMetrics.measures[k].history[d].value;
-              } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-machine-learning") {
-                //  result.bugs = responseMetrics.measures[k].history[d].value;
-              }
-
-          }
-        }
-    return result.Files;
-  });
-}
-
+/*
 export function findgzissues(projects: Project[]) {
-  const gzdata = [];
-  let result = {
-    issues: "1"
-  };
+  var gzdata;
+
   for (let i = 0; i < projects.length; i++){
-    getJSON('/api/measures/search_history', {
+   getJSON('/api/measures/search_history', {
       component: projects[i].key,
       metrics: "lngprt-gyzr-scan-file-count",
       ps: 1000
     }).then(function (responseMetrics) {
+     let result = {
+       issues: "1"
+     };
       for (let d = 0; d < responseMetrics.measures[0].history.length; d++) {
         if (responseMetrics.measures[0].metric === "lngprt-gyzr-scan-file-count") {
           result.issues = responseMetrics.measures[0].history[d].value;
         }
       }
+     gzdata[i] = result.issues;
     });
-    gzdata[i] = result.issues;
+
   }
   return gzdata;
 }
+*/
 
-export function findgzrci(project: Project) {
+export function findgzissues(project: Project) {
 
   return getJSON('/api/measures/search_history', {
-    component: project.key,
-    metrics: "lngprt-gyzr-violations-rci",
-    ps: 1000
-  }).then(function (responseMetrics) {
-
-    let result = {
-      rci: "1"
-
-    };
-    for (let d = 0; d < responseMetrics.measures[0].history.length; d++) {
-      if (responseMetrics.measures[0].metric === "lngprt-gyzr-violations-rci") {
-        result.rci = responseMetrics.measures[0].history[d].value;
+      component: project.key,
+      metrics: "lngprt-gyzr-scan-file-count",
+      ps: 1000
+    }).then(function (responseMetrics) {
+      let result = {
+        issues: "1",
+        rci: "1",
+        comp: "",
+        rem: ""
+      };
+      for (let d = 0; d < responseMetrics.measures[0].history.length; d++) {
+        if (responseMetrics.measures[0].metric === "lngprt-gyzr-scan-file-count") {
+          result.issues = responseMetrics.measures[0].history[d].value;
+        }else if (responseMetrics.measures[0].metric === "lngprt-gyzr-violations-rci") {
+          result.rci = responseMetrics.measures[0].history[d].value;
+        }else if (responseMetrics.measures[0].metric === "lngprt-lrm-status-avg-completion-percent") {
+          result.comp = responseMetrics.measures[0].history[d].value;
+        }else if (responseMetrics.measures[0].metric === "reliability_remediation_effort") {
+          result.rem = responseMetrics.measures[0].history[d].value;
+        }
       }
-
-    }
-    return result.rci;
-  });
+      return result;
+    });
 }
 
-export function findlrm(project: Project) {
+export function try12(projects: Project[]|undefined){
 
-  return getJSON('/api/measures/search_history', {
-    component: project.key,
-    metrics: "lngprt-lrm-status-avg-completion-percent",
-    ps: 1000
-  }).then(function (responseMetrics) {
-
-    let result = {
-      rci: "1"
-
-    };
-    for (let d = 0; d < responseMetrics.measures[0].history.length; d++) {
-      if (responseMetrics.measures[0].metric === "lngprt-lrm-status-avg-completion-percent") {
-        result.rci = responseMetrics.measures[0].history[d].value;
-      }
-
-    }
-    return result.rci;
-  });
+  var gzdata =[];
+  if(projects===undefined)
+    return null;
+  for (let i = 0; i < projects.length; i++){
+    gzdata[i]  = findgzissues(projects[i]);
+  }
+  return gzdata;
 }

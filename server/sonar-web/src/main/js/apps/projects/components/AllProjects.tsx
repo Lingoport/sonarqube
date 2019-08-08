@@ -32,7 +32,7 @@ import ScreenPositionHelper from '../../../components/common/ScreenPositionHelpe
 import Suggestions from '../../../app/components/embed-docs-modal/Suggestions';
 import Visualizations from '../visualizations/Visualizations';
 import { Project, Facets } from '../types';
-import { fetchProjects, parseSorting, SORTING_SWITCH } from '../utils';
+import {fetchProjects, parseSorting, SORTING_SWITCH} from '../utils';
 import { parseUrlQuery, Query, hasFilterParams, hasVisualizationParams } from '../query';
 import { translate } from '../../../helpers/l10n';
 import { addSideBarClass, removeSideBarClass } from '../../../helpers/pages';
@@ -44,6 +44,7 @@ import { OnboardingContext } from '../../../app/components/OnboardingContext';
 import { withRouter, Location, Router } from '../../../components/hoc/withRouter';
 import '../../../components/search-navigator.css';
 import '../styles.css';
+import {getJSON} from "../../../helpers/request";
 
 interface Props {
   currentUser: T.CurrentUser;
@@ -62,6 +63,7 @@ interface State {
   projects?: Project[];
   query: Query;
   total?: number;
+  data?:any;
 }
 
 const PROJECTS_SORT = 'sonarqube.projects.sort';
@@ -85,6 +87,10 @@ export class AllProjects extends React.PureComponent<Props, State> {
     }
     this.handleQueryChange(true);
     this.updateFooterClass();
+    if(this.state.projects!=undefined&&this.state.projects.length!=0){
+      const result = this.getgz(this.state.projects);
+      this.setState({data: result})
+    }
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -243,6 +249,46 @@ export class AllProjects extends React.PureComponent<Props, State> {
     }
   };
 
+
+  findgzissues(project: Project) {
+
+    return getJSON('/api/measures/search_history', {
+      component: project.key,
+      metrics: "lngprt-gyzr-scan-file-count",
+      ps: 1000
+    }).then(function (responseMetrics) {
+      let result = {
+        issues: "1",
+        rci: "4",
+        comp: "2",
+        rem: "3"
+      };
+      for (let d = 0; d < responseMetrics.measures[0].history.length; d++) {
+        if (responseMetrics.measures[0].metric === "lngprt-gyzr-scan-file-count") {
+          result.issues = responseMetrics.measures[0].history[d].value;
+        }else if (responseMetrics.measures[0].metric === "lngprt-gyzr-violations-rci") {
+          result.rci = responseMetrics.measures[0].history[d].value;
+        }else if (responseMetrics.measures[0].metric === "lngprt-lrm-status-avg-completion-percent") {
+          result.comp = responseMetrics.measures[0].history[d].value;
+        }else if (responseMetrics.measures[0].metric === "reliability_remediation_effort") {
+          result.rem = responseMetrics.measures[0].history[d].value;
+        }
+      }
+      return result;
+    });
+  }
+
+  getgz = async(projects: Project[]|undefined) =>{
+
+    var gzdata =[];
+    if(projects===undefined)
+      return null;
+    for (let i = 0; i < projects.length; i++){
+      gzdata[i]  = await this.findgzissues(projects[i]);
+    }
+    return gzdata;
+  }
+
   renderSide = () => (
     <ScreenPositionHelper className="layout-page-side-outer">
       {({ top }) => (
@@ -322,6 +368,7 @@ export class AllProjects extends React.PureComponent<Props, State> {
                 organization={this.props.organization}
                 projects={this.state.projects}
                 query={this.state.query}
+                data={this.state.data}
               />
             )}
             <ListFooter
