@@ -25,9 +25,6 @@ import { getOrganizations } from '../../api/organizations';
 import { searchProjects, Facet } from '../../api/components';
 import { getMeasuresForProjects } from '../../api/measures';
 import { isDiffMetric, getPeriodValue } from '../../helpers/measures';
-import { getJSON } from '../../helpers/request';
-import { Project } from './types';
-
 
 interface SortingOption {
   class?: string;
@@ -392,69 +389,4 @@ export function formatDuration(ms: number) {
     { value: hours, label: 'duration.hours' },
     { value: minutes, label: 'duration.minutes' }
   ]);
-}
-
-/*
-export function findgzissues(projects: Project[]) {
-  var gzdata;
-
-  for (let i = 0; i < projects.length; i++){
-   getJSON('/api/measures/search_history', {
-      component: projects[i].key,
-      metrics: "lngprt-gyzr-scan-file-count",
-      ps: 1000
-    }).then(function (responseMetrics) {
-     let result = {
-       issues: "1"
-     };
-      for (let d = 0; d < responseMetrics.measures[0].history.length; d++) {
-        if (responseMetrics.measures[0].metric === "lngprt-gyzr-scan-file-count") {
-          result.issues = responseMetrics.measures[0].history[d].value;
-        }
-      }
-     gzdata[i] = result.issues;
-    });
-
-  }
-  return gzdata;
-}
-*/
-
-export function findgzissues(project: Project) {
-
-  return getJSON('/api/measures/search_history', {
-      component: project.key,
-      metrics: "lngprt-gyzr-scan-file-count",
-      ps: 1000
-    }).then(function (responseMetrics) {
-      let result = {
-        issues: "1",
-        rci: "1",
-        comp: "",
-        rem: ""
-      };
-      for (let d = 0; d < responseMetrics.measures[0].history.length; d++) {
-        if (responseMetrics.measures[0].metric === "lngprt-gyzr-scan-file-count") {
-          result.issues = responseMetrics.measures[0].history[d].value;
-        }else if (responseMetrics.measures[0].metric === "lngprt-gyzr-violations-rci") {
-          result.rci = responseMetrics.measures[0].history[d].value;
-        }else if (responseMetrics.measures[0].metric === "lngprt-lrm-status-avg-completion-percent") {
-          result.comp = responseMetrics.measures[0].history[d].value;
-        }else if (responseMetrics.measures[0].metric === "reliability_remediation_effort") {
-          result.rem = responseMetrics.measures[0].history[d].value;
-        }
-      }
-      return result;
-    });
-}
-
-export function try12(projects: Project[]|undefined){
-
-  var gzdata =[];
-  if(projects===undefined)
-    return null;
-  for (let i = 0; i < projects.length; i++){
-    gzdata[i]  = findgzissues(projects[i]);
-  }
-  return gzdata;
 }

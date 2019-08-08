@@ -59,7 +59,7 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
             <span className="spacer-right">
-              {lrm.rci}
+              {lrm.rci}%
             </span>
           </div>
           <div className="project-card-measure-label-with-icon">
@@ -72,7 +72,7 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
              <span className="spacer-right">
-              {lrm.comp}
+              {lrm.comp}%
             </span>
           </div>
           <div className="project-card-measure-label-with-icon">

@@ -49,7 +49,7 @@ export default class ProjectsList extends React.PureComponent<Props> {
   }
 
   componentWillMount() {
-    this.getgz(this.props.projects);
+   // this.getgz(this.props.projects);
     this.getgz(this.props.projects).then(
         (valuesReturnedByAPI) => {
           this.setState({
@@ -73,21 +73,21 @@ export default class ProjectsList extends React.PureComponent<Props> {
     }).then(function (responseMetrics) {
       let result = {
         issues: "1",
-        rci: "4",
-        comp: "2",
-        rem: "3"
+        rci: "2",
+        comp: "3",
+        rem: "4"
       };
       const numberOfMeasuresRetrieved = 4;
       for (let k = 0; k < numberOfMeasuresRetrieved; k++) {
-        for (let d = 0; d < responseMetrics.measures[0].history.length; d++) {
-          if (responseMetrics.measures[0].metric === "lngprt-gyzr-scan-file-count") {
-            result.issues = responseMetrics.measures[0].history[d].value;
-          } else if (responseMetrics.measures[0].metric === "lngprt-gyzr-violations-rci") {
-            result.rci = responseMetrics.measures[0].history[d].value;
-          } else if (responseMetrics.measures[0].metric === "lngprt-lrm-status-avg-completion-percent") {
-            result.comp = responseMetrics.measures[0].history[d].value;
-          } else if (responseMetrics.measures[0].metric === "reliability_remediation_effort") {
-            result.rem = responseMetrics.measures[0].history[d].value;
+        for (let d = 0; d < responseMetrics.measures[k].history.length; d++) {
+          if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-file-count") {
+            result.issues = responseMetrics.measures[k].history[d].value;
+          } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-violations-rci") {
+            result.rci = responseMetrics.measures[k].history[d].value;
+          } else if (responseMetrics.measures[k].metric === "lngprt-lrm-status-avg-completion-percent") {
+            result.comp = responseMetrics.measures[k].history[d].value;
+          } else if (responseMetrics.measures[k].metric === "reliability_remediation_effort") {
+            result.rem = responseMetrics.measures[k].history[d].value;
           }
         }
       }
@@ -97,6 +97,7 @@ export default class ProjectsList extends React.PureComponent<Props> {
   }
 
   getgz = async(projects: Project[]|undefined) =>{
+  //  getgz (projects: Project[]|undefined){
 
     var gzdata =[];
     if(projects===undefined)
@@ -104,7 +105,7 @@ export default class ProjectsList extends React.PureComponent<Props> {
     for (let i = 0; i < projects.length; i++){
       gzdata[i]  = await this.findgzissues(projects[i]);
     }
-    await this.setState({lrmdata: gzdata})
+   // await this.setState({lrmdata: gzdata})
     return gzdata;
   }
 
