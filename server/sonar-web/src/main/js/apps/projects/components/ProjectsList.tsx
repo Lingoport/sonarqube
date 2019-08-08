@@ -81,11 +81,11 @@ export default class ProjectsList extends React.PureComponent<Props> {
         for (let d = 0; d < responseMetrics.measures[k].history.length; d++) {
           if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-file-count") {
             result.issues = responseMetrics.measures[k].history[d].value;
-            if(result.issues.length<1)
+            if(result.issues===undefined||result.issues.length<1)
               result.issues = '-';
           } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-violations-rci") {
             result.rci = responseMetrics.measures[k].history[d].value;
-            if(result.rci.length<1)
+            if(result.rci===undefined||result.rci.length<1)
               result.rci = '-';
           } else if (responseMetrics.measures[k].metric === "lngprt-lrm-status-avg-completion-percent") {
             result.comp = responseMetrics.measures[k].history[d].value;
