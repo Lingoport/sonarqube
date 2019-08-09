@@ -67,7 +67,7 @@ export default class ProjectsList extends React.PureComponent<Props> {
   findgzissues(project: Project) {
     return getJSON('/api/measures/search_history', {
       component: project.key,
-      metrics: "lngprt-gyzr-scan-file-count,lngprt-gyzr-violations-rci,lngprt-lrm-status-avg-completion-percent,reliability_remediation_effort",
+      metrics: "lngprt-gyzr-violations,lngprt-gyzr-violations-rci,lngprt-lrm-status-avg-completion-percent,reliability_remediation_effort",
       ps: 1000
     }).then(function (responseMetrics) {
       let result = {
@@ -79,7 +79,7 @@ export default class ProjectsList extends React.PureComponent<Props> {
       const numberOfMeasuresRetrieved = 4;
       for (let k = 0; k < numberOfMeasuresRetrieved; k++) {
         for (let d = 0; d < responseMetrics.measures[k].history.length; d++) {
-          if (responseMetrics.measures[k].metric === "lngprt-gyzr-scan-file-count") {
+          if (responseMetrics.measures[k].metric === "lngprt-gyzr-violations") {
             result.issues = responseMetrics.measures[k].history[d].value;
             if(result.issues===undefined||result.issues.length<1)
               result.issues = '-';
