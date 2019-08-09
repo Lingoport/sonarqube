@@ -42,6 +42,14 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
   }
   let link = 'project/extension/lingoport/globalyzer_page?id='+measures.key+'&qualifier=TRK'
   let lrm_link = 'project/extension/lingoport/lrm_page?id='+measures.key+'&qualifier=TRK'
+  let lrm_rem = lrm.rem;
+  if(Number(lrm.rem)<=60){
+    lrm_rem = lrm.rem + 'min';
+  }else if(Number(lrm.rem)<=1440){
+    lrm_rem = Math.round( Number(lrm.rem)/60) + 'h';
+  }else{
+    lrm_rem = Math.round( Number(lrm.rem)/1440) + 'd';
+  }
   return (
     <div className="project-card-measures">
       <div className="project-card-measure" data-key="reliability_rating">
@@ -87,7 +95,7 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
             <span className="spacer-right">
-              {lrm.rem}d
+              {lrm_rem}
             </span>
           </div>
           <div className="project-card-measure-label">REMEDIATION</div>
