@@ -67,7 +67,6 @@ export default function PageSidebar(props: Props) {
         <h3>{translate('filters')}</h3>
       </div>
       <QualityGateFilter {...facetProps} facet={getFacet(facets, 'gate')} value={query.gate} />
-        <SizeFilter {...facetProps} facet={getFacet(facets, 'size')} value={query.size} />
 
         <ReliabilityFilter
             {...facetProps}
