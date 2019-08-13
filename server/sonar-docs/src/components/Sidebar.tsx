@@ -203,19 +203,19 @@ export default class Sidebar extends React.PureComponent<Props, State> {
           <a href="https://www.sonarqube.org/" rel="noopener noreferrer" target="_blank">
             <DownloadIcon /> SonarQube
           </a>
-          <a href="https://community.sonarsource.com/" rel="noopener noreferrer" target="_blank">
+          <a href="https://wiki.lingoport.com/About_Dashboard" rel="noopener noreferrer" target="_blank">
             <img alt="Community" src={`/${this.props.version}/images/community.svg`} /> Community
           </a>
           <a
             className="icon-only"
-            href="https://twitter.com/SonarQube"
+            href="https://twitter.com/Lingoport"
             rel="noopener noreferrer"
             target="_blank">
             <img alt="Twitter" src={`/${this.props.version}/images/twitter.svg`} />
           </a>
           <a
             className="icon-only"
-            href="https://www.sonarsource.com/resources/product-news/"
+            href="https://lingoport.com/software-internationalization-products/"
             rel="noopener noreferrer"
             target="_blank">
             <img alt="Product News" src={`/${this.props.version}/images/newspaper.svg`} />
