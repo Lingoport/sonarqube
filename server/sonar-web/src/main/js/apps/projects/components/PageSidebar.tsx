@@ -28,7 +28,6 @@ import { RawQuery } from '../../../helpers/query';
 import { Facets } from '../types';
 import { hasFilterParams } from '../query';
 import ReliabilityFilter from "../filters/ReliabilityFilter";
-import SizeFilter from "../filters/SizeFilter";
 
 interface Props {
   facets?: Facets;

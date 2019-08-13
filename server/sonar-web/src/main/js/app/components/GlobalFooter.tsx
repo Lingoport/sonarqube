@@ -49,7 +49,11 @@ export default function GlobalFooter({
   return (
     <div className="page-footer page-container" id="footer">
      <ul>
-      <li><a href="/public/help.html" target="top">Help on Lingoport Dashboard 7.8.1</a></li>
+      <li><a href="https://wiki.lingoport.com/About_Dashboard" target="top">Help on Lingoport Dashboard 7.8.1</a></li>
+
+
+      <li >Internationalization Software by <a href="http://www.lingoport.com/" target="_blank" className="external">
+        <img src="../../images/lingoport/lingoport_logo.png" width="97" height="23"/></a></li>
      </ul>
 
       {productionDatabase === false && (

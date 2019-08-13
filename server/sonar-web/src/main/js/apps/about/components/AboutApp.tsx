@@ -23,13 +23,6 @@ import { keyBy } from 'lodash';
 import { Link } from 'react-router';
 import { Location } from 'history';
 import AboutProjects from './AboutProjects';
-import AboutLanguages from './AboutLanguages';
-import AboutCleanCode from './AboutCleanCode';
-import AboutQualityModel from './AboutQualityModel';
-import AboutQualityGates from './AboutQualityGates';
-import AboutLeakPeriod from './AboutLeakPeriod';
-import AboutStandards from './AboutStandards';
-import AboutScanners from './AboutScanners';
 import EntryIssueTypes from './EntryIssueTypes';
 import A11ySkipTarget from '../../../app/components/a11y/A11ySkipTarget';
 import GlobalContainer from '../../../app/components/GlobalContainer';
@@ -136,7 +129,7 @@ export class AboutApp extends React.PureComponent<Props, State> {
               )}
               <a
                 className="button"
-                href="https://redirect.sonarsource.com/doc/home.html"
+                href="https://wiki.lingoport.com/About_Dashboard"
                 rel="noopener noreferrer"
                 target="_blank">
                 {translate('about_page.read_documentation')}
@@ -158,30 +151,9 @@ export class AboutApp extends React.PureComponent<Props, State> {
             <div className="about-page-section" dangerouslySetInnerHTML={{ __html: customText }} />
           )}
 
-          <AboutLanguages />
-
-          <AboutQualityModel />
-
-          <div className="flex-columns">
-            <div className="flex-column flex-column-half about-page-group-boxes">
-              <AboutCleanCode />
-            </div>
-            <div className="flex-column flex-column-half about-page-group-boxes">
-              <AboutLeakPeriod />
-            </div>
           </div>
 
-          <div className="flex-columns">
-            <div className="flex-column flex-column-half about-page-group-boxes">
-              <AboutQualityGates />
-            </div>
-            <div className="flex-column flex-column-half about-page-group-boxes">
-              <AboutStandards appState={this.props.appState} />
-            </div>
-          </div>
 
-          <AboutScanners />
-        </div>
       </GlobalContainer>
     );
   }
