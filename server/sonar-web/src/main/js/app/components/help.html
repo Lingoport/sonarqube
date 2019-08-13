@@ -1,0 +1,529 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" href="../images/lingoport/dashboard_favicon.ico"
+	type="image/x-icon">
+<link rel="shortcut icon" href="../images/lingoport/dashboard_favicon.ico"
+	type="image/x-icon">
+<link rel="stylesheet" href="../css/lingoport_styles.css"
+	type="text/css">
+<title>Lingoport Dashboard 5.6.7 Help</title>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="header_container">
+			<div id="header_logo">
+				<a href="http://www.lingoport.com/software-internationalization-products/dashboard"> <img
+					src="../images/lingoport/dashboard_banner_268_55.png"
+					alt="Lingoport Dashboard" border="0">
+				</a>
+			</div>
+			<div id="header_text">
+				<h1>Help</h1>
+				<h2>Lingoport Dashboard 5.6.7</h2>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<div id="content">
+			<h1>Navigating the Lingoport Dashboard</h1>
+			<h2>Dashboard Projects</h2>
+			<p>When you first access the Lingoport Dashboard from your
+				browser, you will see the Projects list.</p>
+			<p>
+				These projects are created using the Lingoport Dashboard Client
+				installer. The Lingoport Dashboard Client installer creates
+				scripts (DashboardUpload, GlobalyzerImportScanReport, GlobalyzerScanReport, LRMScan) 
+				that you can call from your continuous build
+				environment or from a user's system to run your Globalyzer Project
+				Scans and/or your Lingoport Resource Manager reports, and then
+				upload the results to an associated Lingoport Dashboard Project
+				(with the same name as your Globalyzer Project and/or your LRM
+				Project). The <b>javademo</b> Dashboard project shows both the
+				Globalyzer results for the <b>internationalization</b> side and the
+				LRM results for a status of the <b>localized resource files</b> for
+				the software project. </br> </br>
+			</p>
+			<p>
+				To add your own dashboard projects, run the <b>Lingoport
+					Dashboard Client</b> installer. Then run the customized
+				scripts to generate the reports and to upload the data
+				to the Lingoport Dashboard.
+			</p>
+			<p>
+				<br />
+			</p>
+			<p>The following lists the information you'll see when on the
+				Projects page:</p>
+			<p>
+				<br />
+			</p>
+			<ul>
+				<li><b>Quality Gate (QG): </b>The project status with respect to its quality gate. </li>
+				<li><b>NAME: </b> The name of the Lingoport Dashboard project.</li>
+				<li><b>VERSION: </b> The version of the Lingoport Dashboard
+					project, as set in the sonar-project.properties file, which is created by the
+               DashboardUpload script. The default is 1.0.
+            </li>
+				<li><b>Lines of Code (LOC): </b> The total lines of code from all the
+					Globalyzer Scan data.</li>
+				<li><b>TECHNICAL DEBT: </b> Total effort (in days) to fix all the issues on the component and therefore 
+				to comply to all the requirements</li>
+				<li><b>LAST ANALYSIS: </b> The last date the Dashboard was
+					updated.</li>
+			</ul>
+
+			<p>
+				<b>Note:</b> To return to the Projects page, click on <b>Dashboards -> Home</b> in
+				the menu bar.
+			</p>
+			<p>
+				<br />
+			</p>
+
+			<h1>A Single Project's Dashboard</h1>
+			<p>
+				Click on a project name in the Projects page to see the project
+				overview. For example, click on the <b>javademo</b> project. The
+				following sections describe the various widgets of the main
+				Dashboard page.
+			</p>
+			<p>
+				<br />
+			</p>
+			<h2>Time changes (drop down)</h2>
+         <p>See the project data over
+					various time spans to see how i18n and L10n issue counts have gone up or
+					down.</p>
+               
+			<br />
+			<h2>Globalyzer Summary</h2>
+			<p>This widget totals all the Globalyzer Scan results for your
+				Globalyzer project in the 4 categories: Embedded Strings,
+				Locale-Sensitive Methods, General Patterns, and Static File
+				References.</p>
+			<p>Click on each number to drill down on the specific issues
+				identified by Globalyzer.</p>
+			<br />
+			<h2>Resource Manager Summary Report</h2>
+			<p>This widget provides a quick overview of the current
+				translation status of the resource files based on the LRM project
+				configuration.
+			<ul>
+				<li>Base Resource Files: the number of resource files in the
+					default locale expected to be translated to the target locales.</li>
+				<li>Base Resource Words: the number of words found in the
+					resource files and expected to be translated to the target locales.</li>
+				<li>Target Locales: the total number of target locales for this
+					project. For instance, if you are targeting fr_FR, fr_CA, and
+					de_DE, it would be three target locales.</li>
+				<li>% Complete: the percentage of translated words over all
+					locales. For instance, if all the files are completed translated to
+					fr_FR and fr_CA, and none to de_DE, the % Complete would be 66%.</li>
+				<li>Last Prepped Kit Version: the kit number of the last kit
+					sent for translation.</li>
+				<li>Last Prepped Kit Date: when the L10n kit was last sent for
+					translation, in UTC.</li>
+			</ul>
+			</p>
+
+			<h2>Issues and Technical Debt</h2>
+
+			<p>This widget shows the issues and technical debt identified by Globalyzer
+				and/or by LRM as a combined set of issues.
+			<p>
+			<p>Click on each number to drill down on the specific issues
+				identified by Globalyzer or LRM.</p>
+
+			<p>
+				<br />
+			</p>
+
+			<h2>Issues Time Line</h2>
+			<p>This widget shows the overall progress of the project using
+				the total number of issues and the total number of remaining
+				words to be translated over time.</p>
+			<p>
+				<br />
+			</p>
+
+			<h1>Globalyzer & i18n</h1>
+			<p>
+				If you have configured your Dashboard project to show Globalyzer
+				data, click on the <b>Globalyzer</b> entry on the More drop-down menu
+				to see more internationalization details.
+			</p>
+
+			<br />
+			<h2>Globalyzer Summary</h2>
+			<p>This widget totals all the Globalyzer Scan results for your
+				Globalyzer project in the 4 categories: Embedded Strings,
+				Locale-Sensitive Methods, General Patterns, and Static File
+				References.</p>
+			<p>Click on each number to drill down on the specific issues
+				identified by Globalyzer.</p>
+			<br />
+
+			<h2>Globalyzer Scans</h2>
+			<p>This widget gives you individual Globalyzer Scan information,
+				showing you the associated Rule Set, the total number of i18n issues, and
+				then the number of lines of code and number of source code files that were processed 
+            during the scan.</p>
+			<p>
+				<br />
+			</p>
+
+			<h2>Globalyzer Issues</h2>
+			<p>The Issues widget is where you can see your i18n issues
+				broken down by severity. We've mapped Globalyzer priority 1 issues
+				to Critical; priority 2 issues to Major; and priority 3 and 4 and 5
+				issues to Minor. You can login as Admin and modify this mapping by
+				selecting Settings in the menu bar and then Configuration and Globalyzer Violations Widget Plugin. 
+				</p>
+			<p>
+				<br />
+			</p>
+			<p>As mentioned on the Projects page, the Rules Compliance is a
+				measure of how far you are along in your internationalization
+				effort.</p>
+			<p>Click on the total issues to drilldown to more specific
+				details.</p>
+			<p>
+				<br />
+			</p>
+
+			<h2>Issues Time Line</h2>
+			<p>As you update your Dashboard's Projects with your latest Scan
+				data, you'll see the changes reflected in the time line, indicating
+				how your internationalization efforts are proceeding.</p>
+			<p>
+				<br />
+			</p>
+			<h1>Resource Manager & L10n</h1>
+			<p>
+				If you have configured your Dashboard project to show Lingoport
+				Resource Manager data, click on the <b>Resource Manager</b> entry on the More drop-down menu
+				to see more resource translation details.
+			</p>
+			<br />
+			<h2>Source Issues</h2>
+			<p>These issues are found in the source directory, for
+				instance after checking out a project on a build machine or a
+				developer system. Click on the number of issues to drill down to
+				the exact file and issues detected by LRM.</p>
+			<p>
+				<br />
+			</p>
+			<h2>Translation Issues</h2>
+			<p>These issues are found when trying to import a target
+				locale translation; for example, after a translation group has sent
+				back the French files for integration. The issues will be listed,
+				even if the files themselves will not be part of the source
+				directories. It helps the translation group see what LRM has
+				identified as an issue and points to the specific location in the
+				file where the issue was found so it is easier to correct.</p>
+			<p>
+				<br />
+			</p>
+			<h2>Next Prep Kit Content</h2>
+			<p>This widget provides information on the contents of the next prep kit.<br>
+			For each target locale, this widget shows the number of files, number of keys
+			and number of words that will be sent out in the next prep kit. If a target locale
+			is missing from the widget, then the next prep kit will not contain any files for
+			that target locale.</p>
+			<p>If there are any critical errors, such as a duplicate key, then this widget will display 
+			the number of critical errors.			
+			</p>
+			<p>
+				<br />
+			</p>
+			<h2>Prep Kit Due Dates</h2>
+			<p>This widget provides a target locale by target locale report of the status of
+			all outstanding prep kits. For each target locale, this widget shows:
+				<ul>
+					<li>Kit #: the prep kit version number</li>
+					<li>Locale: The locale of the prep kit.
+					<li># of Files: the number of files in the prep kit</li>
+					<li>Sent Date: the date that the prep kit was created</li>
+					<li>Due Date: the date the prep kit is due. Due date may be blank if no due date was set via LRM</li>
+					<li>Days Late: the difference, in days, between the sent date and the due date. 
+						<ul>
+							<li>The cell is <font style="BACKGROUND-COLOR:#ffff00">yellow</font> if the prep kit is 7-13 days late.</li>
+							<li>The cell is <font style="BACKGROUND-COLOR:#ff0000">red</font> if the prep kit is at least 14 days late</li>
+						</ul>
+							
+				</ul>
+			<p>If there are any critical errors, such as a duplicate key, then this widget will display 
+			the number of critical errors.			
+			</p>
+			<p>
+				<br />
+			</p>			
+			<h2>Resource Manager Productivity Report</h2>
+			<p>This widget provides a target locale by target locale report
+				of how fast the overall process takes.
+			<ul>
+				<li>Base Resource Files: the number of resource files in the
+					default locale expected to be translated to the target locales.</li>
+				<li>Base Resource Keys: the total number of keys in the
+					resource files with text to be translated.</li>
+				<li>Base Resource Words: the total number of words in the
+					resource files expected to be translated in each target locale.</li>
+				<li>Last Sent Kit: the kit number of the latest kit sent for
+					translation.</li>
+			</ul>
+			For each target locale, this widget shows how many words per day
+			in the overall process (from the time the kit is sent to the time the
+			translation is imported correctly into the source directories). It then
+			gives an estimate based on the historical productivity data and the
+			number of remaining words to translate of how long it may take for
+			that target locale.
+			</p>
+			<p>
+				<br />
+			</p>
+			<h2>Resource Manager Completion Report</h2>
+			<p>This widget provides a target locale by target locale report
+				of how complete the translation is.
+			<ul>
+				<li>Base Resource Files: the number of resource files in the
+					default locale expected to be translated to the target locales.</li>
+				<li>Base Resource Keys: the total number of keys in the
+					resource files with text to be translated.</li>
+				<li>Base Resource Words: the total number of words in the
+					resource files expected to be translated in each target locale.</li>
+				<li>Last Sent Kit: the kit number of the latest kit sent for
+					translation.</li>
+			</ul>
+			For each target locale, this widget shows the percentage of
+			completion (number of base words translated/number of base words to translate),
+			how many files still need to be translated, how many keys need
+			translation, and how many words need to be translated.
+			</p>
+			<p>This provides a clear status of which locales are ready for
+				deployment.</p>
+			<p>
+				<br />
+			</p>
+
+
+			<h2>Time Line</h2>
+			<p>This time line shows the number of remaining words to be
+				translated, the total remaining files and the translation issues
+				over time.</p>
+			<p>
+				<br />
+			</p>
+			<h2>Other Notes</h2>
+			<p>Click around on the other links to see other Sonar-provided
+				widgets to see Globalyzer and/or LRM data presented in various ways.</p>
+			<p>
+				<br />
+			</p>
+
+			<h1>Dashboard Checks</h1>
+			<p>The following list describes briefly each one of the checks
+				performed by the Dashboard. There are two categories of checks:
+				Globalyzer checks and LRM checks.</p>
+			<br />
+
+			<h2>Globalyzer Checks</h2>
+			<ul>
+				<li><b>Globalyzer Embedded String Check</b>: checks for strings
+					in the code which are candidates for eternalization. The priority of
+					the check depends on how likely the string needs to be
+					externalized.</li>
+				<li><b>Globalyzer Locale-Sensitive Method Check</b>: checks for
+					methods calls which may lead to incorrect behavior depending on the
+					locale or the encoding, such as formatting a date. The priority of
+					the check depends on how likely the method needs to be refactored
+					for a global market.</li>
+				<li><b>Globalyzer General Pattern Check</b>: checks for
+					patterns in the code which may lead to incorrect behavior depending
+					on the locale or the encoding, such as an ASCII file encoding. The
+					priority of the check depends on how likely the code using the
+					pattern needs to be refactored for i18n.</li>
+				<li><b>Globalyzer Static File Reference Check</b>: checks for
+					files such as a video file or an HTML licensing agreement, which
+					may need to be handled differently for different countries. The
+					priority of the check depends on how likely the code referencing
+					the file needs to be refactored.</li>
+			</ul>
+			<br />
+
+			<h2>LRM Checks</h2>
+			<p>LRM source base checks apply to the resource files to be
+				translated to other languages; for instance, resources.properties or
+				resources.resx, but not resources_fr_FR.properties or
+				resources.fr-FR.resx for applications initially written in U.S.
+				English.</p>
+			<ul>
+				<li><b>LRM Source Base Date Format Check</b>:
+					The base text associated with this key may be a date format
+				</li>
+				<li><b>LRM Source Base Duplicate Key Check</b>: checks that each key
+				    appears only once in each resource file.
+				    If a single key appears multiple times, the code will not know
+					which key to use and the file should not be sent for translation.</li>
+				<li><b>LRM Source Base Encoding Check</b>: checks that the
+					encoding of the resource file matches the encoding specified
+					in the LRM project
+					configuration. If the LRM project states that the
+					resource file should be in ASCII and it is in UTF-16LE, it should
+					not be sent for translation and it may not be read correctly by the
+					application.</li>
+				<li><b>LRM Source Base File Too Big Check</b>: the resource
+					file exceeds the maximum size supported by the Lingoport
+					Resource Manager. It may indicate that the file is not an actual
+					resource file; it could be a video file for instance.</li>
+				<li><b>LRM Source Base HTML Check</b>:
+					There is HTML in the text associated with a key in the base resource.
+				</li>
+				<li><b>LRM Source Base Modified Text Check</b>: The base text 
+					has been modified and the translation has not been updated</li>				
+				<li><b>LRM Source Base No Key Check</b>: a key/value pair is
+					missing the key portion, making the text irretrievable by the
+					application.</li>
+				<li><b>LRM Source Base No Text Check</b>: a key/value pair is
+					missing the value portion, making the key irrelevant in the resource
+					file.</li>
+				<li><b>LRM Source Base Not In LRM Check</b>: the resource file
+					is not part of the LRM project.</li>
+				<li><b>LRM Source Base Unknown File/Line Format Check</b>: 
+					Unknown format for file/line or empty file - The base file/line could not be parsed
+				</li>
+			</ul>
+			<br />
+
+			<p>LRM source translation checks apply to the resource files
+				which have been translated to other languages and are part of the
+				source code; for instance, resources_fr_FR.properties and
+				resources.fr-FR.resx but not resources.properties or resources.resx
+				for applications initially written in U.S. English with
+				French/France as a target language.</p>
+			<ul>
+				<li><b>LRM Source Translation Date Format Check</b>:
+					The translated text associated with this key may be a date format
+				</li>
+				<li><b>LRM Source Translation Duplicate Key Check</b>: checks that each key
+				    appears only once in each translated file.</li>
+				<li><b>LRM Source Translation Empty Key in Translated File Check</b>:  a key/value
+					pair is missing the key portion in the translated file, making the
+					text irretrievable by the application.</li>
+				<li><b>LRM Source Translation Encoding Check</b>: checks that the encoding
+				    of the translated file matches the encoding specified in the LRM project
+				    configuration. If the translated file has the wrong encoding, it may not
+				    be read correctly by the application.</li>
+				<li><b>LRM Source Translation File Too Big Check</b>: the
+					translated resource file exceeds the maximum size supported by
+					the Lingoport Resource Manager.  It may indicate that the
+					file is not an actual resource file; it could be a video file for
+					instance.</li>
+				<li><b>LRM Source Translation HTML Check</b>:
+					There is HTML in the text associated with a key in the translated resource.
+				</li>					
+				<li><b>LRM Source Translation Missing Key Check</b>: The identifier/key 
+					is missing in the translated file in source.
+				<li><b>LRM Source Translation Missed Translation Check</b>: the
+					text in the translated resource file is the same as in the original
+					file.</li>
+				<li><b>LRM Source Translation Missing File Check</b>: the
+					translated resource file is missing. The LRM project configuration
+					calls for this locale.</li>
+				<li><b>LRM Source Translation No Text Check</b>: a key/value pair is
+					missing the value portion in the translated file, making the key
+					irrelevant in the translated file.</li>		
+				<li><b>LRM Source Translation Parameter Mismatch Check</b>: This translated 
+					resource parameters do not match the base resource parameters</li>
+				<li><b>LRM Source Translation Retranslate Check</b>:
+					This text needs to be retranslated for the translated resource.
+				</li>
+				<li><b>LRM Source Translation Unknown File/Line Format Check</b>:
+					Unknown format for file/line or empty file - -The translated resource file/line could not be parsed
+				</li>
+			</ul>
+			<br />
+
+			<p>LRM translation checks apply to the translated files during
+				the import process. Those files are not part of the source code.</p>
+			<ul>
+				<li><b>LRM Translation Duplicate Key Check</b>: checks that each key
+				    appears only once in each translated file to be imported.</li>
+			    <li><b>LRM Translation Empty Key Check</b>: a key/value pair is
+					missing the key portion in the translated file to be imported,
+					making the text irretrievable by the application.</li>
+				<li><b>LRM Translation Encoding Check</b>: checks that the encoding
+				    of the translated file to be imported matches the encoding specified 
+				    in the LRM project
+				    configuration. If the translated file has the wrong encoding, it may not
+				    be read correctly by the application.</li>
+				<li><b>LRM Translation File Already Processed Check</b>: the
+					translated resource file to be imported has already been imported
+					for this kit version.</li>
+				<li><b>LRM Translation File Too Big Check</b>: the translated
+					resource file to be imported exceeds the maximum size supported
+					by the Lingoport Resource Manager. It may indicate that the
+					file is not an actual resource file; it could be a video file for
+					instance.</li>
+				<li><b>LRM Translation Missed Translation Check</b>: the text
+					in the translated resource file to be imported is the same as in
+					the original file.</li>
+				<li><b>LRM Translation Missing File Check</b>: the translated
+					resource file is missing from the kit to import.</li>
+				<li><b>LRM Translation Missing Key Check</b>: the translated
+					file to be imported is missing a key from the original file.</li>
+				<li><b>LRM Translation Missing or Invalid Tag Check</b>: each
+					file copied to a prep kit has a tag which identifies its purpose.
+					This tag has been tampered with or is missing, making the import
+					impossible.</li>
+				<li><b>LRM Translation Parameter Mismatch Check</b>: The translation 
+				    parameters do not match the prep kit's source file  parameters.
+				<li><b>LRM Translation No Text Check</b>: a key/value pair is
+					missing the value portion in the translated file.</li>
+				<li><b>LRM Translation Non-Writable File Check</b>: the
+					translated file cannot be copied to the source directory.</li>
+				<li><b>LRM Translation Source Location Not Found Check</b>: the
+					location where the translated file should be copied does not exist.</li>
+			</ul>
+			<br />
+
+			<p>Finally, if there was any other error on resource files, the
+				following error is shown:</p>
+			<ul>
+            <li><b>LRM Unknown Error Check</b>: some other resource file
+				error occurred.</li>
+         </ul>
+
+			<p>
+				<br />
+			</p>
+
+		</div>
+
+		<div id="push"></div>
+	</div>
+
+	<div id="footer_container">
+		<div id="footer">
+			<p>
+				For more information, please visit <a
+					href="http://www.lingoport.com">www.lingoport.com</a>.
+			</p>
+			</p>
+
+			<div id="footer_credits">
+				<p>
+					The Lingoport Dashboard is built using the <a
+						href="http://www.sonarqube.org/">SonarQube 5.6.6</a> framework.
+				</p>
+				<p>
+					Lingoport Dashboard licensing is available <a
+						href="../license/lingoportdashboard_license.html">here</a>.
+				</p>
+			</div>
+
+			<p>&copy; 2018 by Lingoport Inc. All rights reserved</p>
+		</div>
+	</div>
+</body>
+</html>
