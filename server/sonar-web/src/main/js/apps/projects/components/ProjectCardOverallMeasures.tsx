@@ -48,7 +48,7 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
   }else if(Number(lrm.rem)<=1440){
     lrm_rem = Math.round( Number(lrm.rem)/60) + 'h';
   }else{
-    lrm_rem = Math.round( Number(lrm.rem)/1440) + 'd';
+    lrm_rem = Math.round( Number(lrm.rem)/1440*3) + 'd';
   }
   return (
     <div className="project-card-measures">
