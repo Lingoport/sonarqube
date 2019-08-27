@@ -121,6 +121,7 @@ export class AboutApp extends React.PureComponent<Props, State> {
 
           <div className="about-page-entry">
             <div className="about-page-intro">
+              <img src="../../../images/lingoport/lingoport_logo.png" width="197" height="50"/>
               <h1 className="big-spacer-bottom">{translate('layout.sonar.slogan')}</h1>
               {!this.props.currentUser.isLoggedIn && (
                 <Link className="button button-active big-spacer-right" to="/sessions/new">
