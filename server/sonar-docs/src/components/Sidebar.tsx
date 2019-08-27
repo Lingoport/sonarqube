@@ -171,10 +171,10 @@ export default class Sidebar extends React.PureComponent<Props, State> {
         <div className="sidebar-header">
           <Link to="/">
             <img
-              alt="Continuous Code Quality"
+              alt="Continuous Globalization Quality"
               className="sidebar-logo"
               src={`/${this.props.version}/images/SonarQubeIcon.svg`}
-              title="Continuous Code Quality"
+              title="Continuous Globalization Quality"
               width="160"
             />
           </Link>
