@@ -75,7 +75,7 @@ export default class EmbedDocsPopup extends React.PureComponent<Props> {
         <li className="divider" />
         <li>
           <a
-            href="https://community.sonarsource.com/c/help/sc"
+            href="https://wiki.lingoport.com/About_Dashboard/"
             rel="noopener noreferrer"
             target="_blank">
             {translate('embed_docs.get_help')}
@@ -85,7 +85,7 @@ export default class EmbedDocsPopup extends React.PureComponent<Props> {
         {this.renderTitle(translate('embed_docs.stay_connected'))}
         <li>
           {this.renderIconLink(
-            'https://twitter.com/sonarcloud',
+            'https://twitter.com/Lingoport',
             'embed-doc/twitter-icon.svg',
             'Twitter'
           )}
@@ -109,7 +109,7 @@ export default class EmbedDocsPopup extends React.PureComponent<Props> {
       <React.Fragment>
         <li className="divider" />
         <li>
-          <a href="https://community.sonarsource.com/" rel="noopener noreferrer" target="_blank">
+          <a href="https://wiki.lingoport.com/About_Dashboard/" rel="noopener noreferrer" target="_blank">
             {translate('embed_docs.get_help')}
           </a>
         </li>
@@ -117,14 +117,14 @@ export default class EmbedDocsPopup extends React.PureComponent<Props> {
         {this.renderTitle(translate('embed_docs.stay_connected'))}
         <li>
           {this.renderIconLink(
-            'https://www.sonarsource.com/resources/product-news/',
+            'https://lingoport.com/software-internationalization-products/',
             'embed-doc/sq-icon.svg',
             translate('embed_docs.news')
           )}
         </li>
         <li>
           {this.renderIconLink(
-            'https://twitter.com/SonarQube',
+            'https://twitter.com/Lingoport',
             'embed-doc/twitter-icon.svg',
             'Twitter'
           )}
