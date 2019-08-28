@@ -213,7 +213,7 @@ export class OverviewApp extends React.PureComponent<Props, State> {
 
         <div className="overview-domains-list">
           <BugsAndVulnerabilities {...domainProps} />
-
+            <Duplications {...domainProps} />
         </div>
       </div>
     );
