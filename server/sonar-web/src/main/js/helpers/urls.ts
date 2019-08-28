@@ -51,7 +51,7 @@ export function getPathUrlAsString(path: Location, internal = true): string {
 }
 
 export function getProjectUrl(project: string, branch?: string): Location {
-  return { pathname: '//project/extension/lingoport/overview_page', query: { id: project, branch } };
+  return { pathname: '/project/extension/lingoport/overview_page', query: { id: project, branch } };
 }
 
 export function getPortfolioUrl(key: string): Location {
