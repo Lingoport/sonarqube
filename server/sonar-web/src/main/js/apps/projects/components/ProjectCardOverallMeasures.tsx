@@ -42,6 +42,7 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
   }
   let link = 'project/extension/lingoport/globalyzer_page?id='+measures.key+'&qualifier=TRK'
   let lrm_link = 'project/extension/lingoport/lrm_page?id='+measures.key+'&qualifier=TRK'
+  let reme = '/component_measures?id='+measures.key+'&metric=reliability_remediation_effort'
   let lrm_rem = lrm.rem;
   if(Number(lrm.rem)<=60){
     lrm_rem = lrm.rem + 'min';
@@ -95,7 +96,7 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
             <span className="spacer-right">
-              {lrm_rem}
+              <a href ={reme}>{lrm_rem}</a>
             </span>
           </div>
           <div className="project-card-measure-label">REMEDIATION</div>
