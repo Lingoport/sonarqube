@@ -29,6 +29,7 @@ import EmptySearch from '../../../components/common/EmptySearch';
 import { Project } from '../types';
 import { Query } from '../query';
 import { OnboardingContext } from '../../../app/components/OnboardingContext';
+import {getJSON} from "../../../helpers/request";
 
 interface Props {
   cardType?: string;
@@ -38,12 +39,76 @@ interface Props {
   organization: T.Organization | undefined;
   projects: Project[];
   query: Query;
+  data: any;
 }
 
 export default class ProjectsList extends React.PureComponent<Props> {
+
+  state = {
+    lrmdata:[]
+  }
+
+  componentWillMount() {
+   // this.getgz(this.props.projects);
+    this.getgz(this.props.projects).then(
+        (valuesReturnedByAPI) => {
+          this.setState({
+            lrmdata: valuesReturnedByAPI
+          });
+        }
+    );
+  }
+
   getCardHeight = () => {
     return this.props.cardType === 'leak' ? 159 : 143;
   };
+
+
+  findgzissues(project: Project) {
+    return getJSON('/api/measures/search_history', {
+      component: project.key,
+      metrics: "lngprt-gyzr-violations,lngprt-gyzr-violations-rci,lngprt-lrm-status-avg-completion-percent,reliability_remediation_effort",
+      ps: 1000
+    }).then(function (responseMetrics) {
+      let result = {
+        issues: "-",
+        rci: "-",
+        comp: "-",
+        rem: "-"
+      };
+      const numberOfMeasuresRetrieved = 4;
+      for (let k = 0; k < numberOfMeasuresRetrieved; k++) {
+        for (let d = 0; d < responseMetrics.measures[k].history.length; d++) {
+          if (responseMetrics.measures[k].metric === "lngprt-gyzr-violations") {
+            result.issues = responseMetrics.measures[k].history[d].value;
+            if(result.issues===undefined||result.issues.length<1)
+              result.issues = '-';
+          } else if (responseMetrics.measures[k].metric === "lngprt-gyzr-violations-rci") {
+            result.rci = responseMetrics.measures[k].history[d].value;
+            if(result.rci===undefined||result.rci.length<1)
+              result.rci = '-';
+          } else if (responseMetrics.measures[k].metric === "lngprt-lrm-status-avg-completion-percent") {
+            result.comp = responseMetrics.measures[k].history[d].value;
+          } else if (responseMetrics.measures[k].metric === "reliability_remediation_effort") {
+            result.rem = responseMetrics.measures[k].history[d].value;
+          }
+        }
+      }
+      return result;
+    });
+  }
+
+  getgz = async(projects: Project[]|undefined) =>{
+    var gzdata =[];
+    if(projects===undefined)
+      return null;
+    for (let i = 0; i < projects.length; i++){
+      gzdata[i]  = await this.findgzissues(projects[i]);
+    }
+   // await this.setState({lrmdata: gzdata})
+    return gzdata;
+  }
+
 
   renderNoProjects() {
     const { currentUser, isFavorite, isFiltered, organization, query } = this.props;
@@ -72,6 +137,9 @@ export default class ProjectsList extends React.PureComponent<Props> {
   renderRow = ({ index, key, style }: ListRowProps) => {
     const project = this.props.projects[index];
     const height = this.getCardHeight();
+    let lrm = null;
+    if(this.state.lrmdata!=undefined)
+       lrm = this.state.lrmdata[index];
     return (
       <div key={key} style={{ ...style, height }}>
         <ProjectCard
@@ -79,6 +147,7 @@ export default class ProjectsList extends React.PureComponent<Props> {
           key={project.key}
           organization={this.props.organization}
           project={project}
+          lrm = {lrm}
           type={this.props.cardType}
         />
       </div>
@@ -113,6 +182,7 @@ export default class ProjectsList extends React.PureComponent<Props> {
       </WindowScroller>
     );
   }
+
 
   render() {
     const { projects } = this.props;

@@ -18,47 +18,50 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 import * as React from 'react';
-import ProjectCardLanguagesContainer from './ProjectCardLanguagesContainer';
-import Measure from '../../../components/measure/Measure';
-import Rating from '../../../components/ui/Rating';
-import CoverageRating from '../../../components/ui/CoverageRating';
-import DuplicationsRating from '../../../components/ui/DuplicationsRating';
-import SizeRating from '../../../components/ui/SizeRating';
-import { translate } from '../../../helpers/l10n';
-import BugIcon from '../../../components/icons-components/BugIcon';
-import CodeSmellIcon from '../../../components/icons-components/CodeSmellIcon';
-import VulnerabilityIcon from '../../../components/icons-components/VulnerabilityIcon';
+import {Project} from "../types";
 
 interface Props {
-  measures: T.Dict<string | undefined>;
+  measures: Project;
+  lrm: any;
 }
 
-export default function ProjectCardOverallMeasures({ measures }: Props) {
+export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
+
   if (measures === undefined) {
     return null;
   }
 
-  const { ncloc } = measures;
-  if (!ncloc) {
-    return <div className="note">{translate('overview.project.empty')}</div>;
+ // const { ncloc } = measures;
+  if(lrm ===undefined){
+    lrm={
+      issues: "-",
+      rci: "-",
+      comp: "-",
+      rem: "-"
+    }
   }
-
+  let link = '/project/extension/lingoport/globalyzer_page?id='+measures.key+'&qualifier=TRK'
+  let lrm_link = '/project/extension/lingoport/lrm_page?id='+measures.key+'&qualifier=TRK'
+  let reme = '/component_measures?id='+measures.key+'&metric=reliability_remediation_effort'
+  let lrm_rem = lrm.rem;
+  if(Number(lrm.rem)<=60){
+    lrm_rem = lrm.rem + 'min';
+  }else if(Number(lrm.rem)<=1440){
+    lrm_rem = Math.round( Number(lrm.rem)/60) + 'h';
+  }else{
+    lrm_rem = Math.round( Number(lrm.rem)/1440*3) + 'd';
+  }
   return (
     <div className="project-card-measures">
       <div className="project-card-measure" data-key="reliability_rating">
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
-            <Measure
-              className="spacer-right"
-              metricKey="bugs"
-              metricType="SHORT_INT"
-              value={measures['bugs']}
-            />
-            <Rating value={measures['reliability_rating']} />
+            <span className="spacer-right">
+              <a href ={link}>{lrm.issues}</a>
+            </span>
           </div>
           <div className="project-card-measure-label-with-icon">
-            <BugIcon className="little-spacer-right vertical-bottom" />
-            {translate('metric.bugs.name')}
+            GLOBALYZER ISSUES
           </div>
         </div>
       </div>
@@ -66,17 +69,12 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
       <div className="project-card-measure" data-key="security_rating">
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
-            <Measure
-              className="spacer-right"
-              metricKey="vulnerabilities"
-              metricType="SHORT_INT"
-              value={measures['vulnerabilities']}
-            />
-            <Rating value={measures['security_rating']} />
+            <span className="spacer-right">
+              <a href ={link}>{lrm.rci}%</a>
+            </span>
           </div>
           <div className="project-card-measure-label-with-icon">
-            <VulnerabilityIcon className="little-spacer-right vertical-bottom" />
-            {translate('metric.vulnerabilities.name')}
+            GLOBALYZER RCI
           </div>
         </div>
       </div>
@@ -84,17 +82,12 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
       <div className="project-card-measure" data-key="sqale_rating">
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
-            <Measure
-              className="spacer-right"
-              metricKey="code_smells"
-              metricType="SHORT_INT"
-              value={measures['code_smells']}
-            />
-            <Rating value={measures['sqale_rating']} />
+             <span className="spacer-right">
+              <a href ={lrm_link}>{lrm.comp}%</a>
+            </span>
           </div>
           <div className="project-card-measure-label-with-icon">
-            <CodeSmellIcon className="little-spacer-right vertical-bottom" />
-            {translate('metric.code_smells.name')}
+            LRM AVG COMPLETE
           </div>
         </div>
       </div>
@@ -102,55 +95,14 @@ export default function ProjectCardOverallMeasures({ measures }: Props) {
       <div className="project-card-measure" data-key="coverage">
         <div className="project-card-measure-inner">
           <div className="project-card-measure-number">
-            {measures['coverage'] != null && (
-              <span className="spacer-right">
-                <CoverageRating value={measures['coverage']} />
-              </span>
-            )}
-            <Measure metricKey="coverage" metricType="PERCENT" value={measures['coverage']} />
+            <span className="spacer-right">
+              <a href ={reme}>{lrm_rem}</a>
+            </span>
           </div>
-          <div className="project-card-measure-label">{translate('metric.coverage.name')}</div>
+          <div className="project-card-measure-label">REMEDIATION</div>
         </div>
       </div>
 
-      <div className="project-card-measure" data-key="duplicated_lines_density">
-        <div className="project-card-measure-inner">
-          <div className="project-card-measure-number">
-            {measures['duplicated_lines_density'] != null && (
-              <span className="spacer-right">
-                <DuplicationsRating value={Number(measures['duplicated_lines_density'])} />
-              </span>
-            )}
-            <Measure
-              metricKey="duplicated_lines_density"
-              metricType="PERCENT"
-              value={measures['duplicated_lines_density']}
-            />
-          </div>
-          <div className="project-card-measure-label">
-            {translate('metric.duplicated_lines_density.short_name')}
-          </div>
-        </div>
-      </div>
-
-      {measures['ncloc'] != null && (
-        <div className="project-card-measure project-card-ncloc" data-key="ncloc">
-          <div className="project-card-measure-inner pull-right">
-            <div className="project-card-measure-number">
-              <Measure metricKey="ncloc" metricType="SHORT_INT" value={measures['ncloc']} />
-              <span className="spacer-left">
-                <SizeRating value={Number(measures['ncloc'])} />
-              </span>
-            </div>
-            <div className="project-card-measure-label">
-              <ProjectCardLanguagesContainer
-                className="project-card-languages"
-                distribution={measures['ncloc_language_distribution']}
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

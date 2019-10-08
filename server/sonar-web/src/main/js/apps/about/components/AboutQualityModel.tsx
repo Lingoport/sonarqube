@@ -35,30 +35,12 @@ export default function AboutQualityModel() {
               <BugIcon />
             </div>
             <p className="about-page-text overflow-hidden">
-              <strong>{translate('issue.type.BUG.plural')}</strong>{' '}
-              {translate('about_page.quality_model.bugs')}
+              <strong>Issues</strong>{' '}
+              Issues
             </p>
           </div>
 
-          <div className="flex-column flex-column-third">
-            <div className="pull-left little-spacer-right">
-              <VulnerabilityIcon />
-            </div>
-            <p className="about-page-text overflow-hidden">
-              <strong>{translate('issue.type.VULNERABILITY.plural')}</strong>{' '}
-              {translate('about_page.quality_model.vulnerabilities')}
-            </p>
-          </div>
 
-          <div className="flex-column flex-column-third">
-            <div className="pull-left little-spacer-right">
-              <CodeSmellIcon />
-            </div>
-            <p className="about-page-text overflow-hidden">
-              <strong>{translate('issue.type.CODE_SMELL.plural')}</strong>{' '}
-              {translate('about_page.quality_model.code_smells')}
-            </p>
-          </div>
         </div>
       </div>
     </div>

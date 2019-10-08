@@ -100,6 +100,7 @@ public class CorePropertyDefinitions {
         .description("URL to logo image. Any standard format is accepted.")
         .category(CoreProperties.CATEGORY_GENERAL)
         .subCategory(CoreProperties.SUBCATEGORY_LOOKNFEEL)
+              .defaultValue("../../../images/lingoport/logo_dashboard_100x30.png")
         .build(),
       PropertyDefinition.builder(WebConstants.SONAR_LF_LOGO_WIDTH_PX)
         .deprecatedKey("sonar.branding.image.width")

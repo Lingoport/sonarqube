@@ -98,8 +98,7 @@ export class OverviewApp extends React.PureComponent<Props, State> {
 
   isEmpty = () => {
     return (
-      this.state.measures === undefined ||
-      this.state.measures.find(measure => measure.metric.key === 'ncloc') === undefined
+      this.state.measures === undefined
     );
   };
 
@@ -166,7 +165,7 @@ export class OverviewApp extends React.PureComponent<Props, State> {
         <h3>
           {!this.state.measures ||
           !this.state.measures.find(measure => measure.metric.key === 'projects')
-            ? translate(isApp ? 'portfolio.app.empty' : 'overview.project.empty')
+            ? translate(isApp ? 'overview.project.empty' : 'overview.project.empty')
             : translate(
                 isApp ? 'portfolio.app.no_lines_of_code' : 'overview.project.no_lines_of_code'
               )}
@@ -214,9 +213,7 @@ export class OverviewApp extends React.PureComponent<Props, State> {
 
         <div className="overview-domains-list">
           <BugsAndVulnerabilities {...domainProps} />
-          <CodeSmells {...domainProps} />
-          <Coverage {...domainProps} />
-          <Duplications {...domainProps} />
+            <Duplications {...domainProps} />
         </div>
       </div>
     );

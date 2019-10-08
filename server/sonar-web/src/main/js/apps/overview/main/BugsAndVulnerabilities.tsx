@@ -36,7 +36,7 @@ export class BugsAndVulnerabilities extends React.PureComponent<ComposedProps> {
     return (
       <div className="overview-card-header">
         <div className="overview-title">
-          <span>{translate('metric.bugs.name')}</span>
+          <span>Lingoport Issues</span>
           <Link
             className="button button-small spacer-left text-text-bottom"
             to={getComponentDrilldownUrl({

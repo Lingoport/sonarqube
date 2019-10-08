@@ -32,7 +32,7 @@ import ScreenPositionHelper from '../../../components/common/ScreenPositionHelpe
 import Suggestions from '../../../app/components/embed-docs-modal/Suggestions';
 import Visualizations from '../visualizations/Visualizations';
 import { Project, Facets } from '../types';
-import { fetchProjects, parseSorting, SORTING_SWITCH } from '../utils';
+import {fetchProjects, parseSorting, SORTING_SWITCH} from '../utils';
 import { parseUrlQuery, Query, hasFilterParams, hasVisualizationParams } from '../query';
 import { translate } from '../../../helpers/l10n';
 import { addSideBarClass, removeSideBarClass } from '../../../helpers/pages';
@@ -62,6 +62,7 @@ interface State {
   projects?: Project[];
   query: Query;
   total?: number;
+  data?:any;
 }
 
 const PROJECTS_SORT = 'sonarqube.projects.sort';
@@ -85,6 +86,7 @@ export class AllProjects extends React.PureComponent<Props, State> {
     }
     this.handleQueryChange(true);
     this.updateFooterClass();
+
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -243,6 +245,7 @@ export class AllProjects extends React.PureComponent<Props, State> {
     }
   };
 
+
   renderSide = () => (
     <ScreenPositionHelper className="layout-page-side-outer">
       {({ top }) => (
@@ -322,6 +325,7 @@ export class AllProjects extends React.PureComponent<Props, State> {
                 organization={this.props.organization}
                 projects={this.state.projects}
                 query={this.state.query}
+                data={this.state.data}
               />
             )}
             <ListFooter
