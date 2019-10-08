@@ -1,4 +1,4 @@
-SonarQube [![Build Status](https://travis-ci.org/SonarSource/sonarqube.svg?branch=master)](https://travis-ci.org/SonarSource/sonarqube) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.sonarqube%3Asonarqube&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.sonarsource.sonarqube%3Asonarqube)
+SonarQube [![Build Status](https://travis-ci.org/SonarSource/sonarqube.svg?branch=master)](https://travis-ci.org/SonarSource/sonarqube) 
 =========
 
 Continuous Inspection
@@ -24,16 +24,7 @@ For support questions ("How do I?", "I got this error, why?", ...), please first
 Be aware that this forum is a community, so the standard pleasantries ("Hi", "Thanks", ...) are expected. And if you don't get an answer to your thread, you should sit on your hands for at least three days before bumping it. Operators are not standing by. :-)
 
 
-Contributing
-------------
 
-If you would like to see a new feature, please create a new thread in the forum ["Suggest new features"](https://community.sonarsource.com/c/suggestions/features).
-
-Please be aware that we are not actively looking for feature contributions. The truth is that it's extremely difficult for someone outside SonarSource to comply with our roadmap and expectations. Therefore, we typically only accept minor cosmetic changes and typo fixes.
-
-With that in mind, if you would like to submit a code contribution, please create a pull request for this repository. Please explain your motives to contribute this change: what problem you are trying to fix, what improvement you are trying to make.
-
-Make sure that you follow our [code style](https://github.com/SonarSource/sonar-developer-toolset#code-style) and all tests are passing (Travis build is executed for each pull request).
 
 Building
 --------
@@ -46,7 +37,10 @@ Execute from project base directory:
 
     ./gradlew build
 
-The zip distribution file is generated in `sonar-application/build/distributions/`. Unzip it and start server by executing:
+The zip distribution file is generated in `sonar-application/build/distributions/`. Unzip it and add lingoport folder to web/images, replace all icon images.
+
+
+Start server by executing:
 
     # on linux
     bin/linux-x86-64/sonar.sh start 
@@ -54,6 +48,8 @@ The zip distribution file is generated in `sonar-application/build/distributions
     bin/macosx-universal-64/sonar.sh start
     # or on Windows
     bin\windows-x86-64\StartSonar.bat 
+    
+    
 
 ### Open in IDE
 
