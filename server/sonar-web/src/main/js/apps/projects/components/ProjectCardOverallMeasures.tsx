@@ -31,7 +31,7 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
     return null;
   }
 
- // const { ncloc } = measures;
+  // const { ncloc } = measures;
   if(lrm ===undefined){
     lrm={
       issues: "-",
@@ -51,58 +51,176 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
   }else{
     lrm_rem = Math.round( Number(lrm.rem)/1440*3) + 'd';
   }
-  return (
-    <div className="project-card-measures">
-      <div className="project-card-measure" data-key="reliability_rating">
-        <div className="project-card-measure-inner">
-          <div className="project-card-measure-number">
+  if(lrm.issues==="-"||lrm.rci==="-"){
+    return (
+        <div className="project-card-measures">
+          <div className="project-card-measure" data-key="reliability_rating">
+            <div className="project-card-measure-inner">
+              <div className="project-card-measure-number">
             <span className="spacer-right">
-              <a href ={link}>{lrm.issues}</a>
+              <h5></h5>
             </span>
+              </div>
+              <div className="project-card-measure-label-with-icon">
+                GLOBALYZER ISSUES
+              </div>
+            </div>
           </div>
-          <div className="project-card-measure-label-with-icon">
-            GLOBALYZER ISSUES
-          </div>
-        </div>
-      </div>
 
-      <div className="project-card-measure" data-key="security_rating">
-        <div className="project-card-measure-inner">
-          <div className="project-card-measure-number">
+          <div className="project-card-measure" data-key="security_rating">
+            <div className="project-card-measure-inner">
+              <div className="project-card-measure-number">
             <span className="spacer-right">
-              <a href ={link}>{lrm.rci}%</a>
+              <h5></h5>
             </span>
+              </div>
+              <div className="project-card-measure-label-with-icon">
+                GLOBALYZER RCI
+              </div>
+            </div>
           </div>
-          <div className="project-card-measure-label-with-icon">
-            GLOBALYZER RCI
-          </div>
-        </div>
-      </div>
 
-      <div className="project-card-measure" data-key="sqale_rating">
-        <div className="project-card-measure-inner">
-          <div className="project-card-measure-number">
+          <div className="project-card-measure" data-key="sqale_rating">
+            <div className="project-card-measure-inner">
+              <div className="project-card-measure-number">
              <span className="spacer-right">
               <a href ={lrm_link}>{lrm.comp}%</a>
             </span>
+              </div>
+              <div className="project-card-measure-label-with-icon">
+                LRM AVG COMPLETE
+              </div>
+            </div>
           </div>
-          <div className="project-card-measure-label-with-icon">
-            LRM AVG COMPLETE
-          </div>
-        </div>
-      </div>
 
-      <div className="project-card-measure" data-key="coverage">
-        <div className="project-card-measure-inner">
-          <div className="project-card-measure-number">
+          <div className="project-card-measure" data-key="coverage">
+            <div className="project-card-measure-inner">
+              <div className="project-card-measure-number">
             <span className="spacer-right">
               <a href ={reme}>{lrm_rem}</a>
             </span>
+              </div>
+              <div className="project-card-measure-label">REMEDIATION</div>
+            </div>
           </div>
-          <div className="project-card-measure-label">REMEDIATION</div>
-        </div>
-      </div>
 
-    </div>
-  );
+        </div>
+    );
+
+  }else{
+    if(lrm.comp===undefined||lrm.comp==="-"||lrm.comp===" "||lrm.comp===""){
+      return (
+          <div className="project-card-measures">
+            <div className="project-card-measure" data-key="reliability_rating">
+              <div className="project-card-measure-inner">
+                <div className="project-card-measure-number">
+            <span className="spacer-right">
+              <a href ={link}>{lrm.issues}</a>
+            </span>
+                </div>
+                <div className="project-card-measure-label-with-icon">
+                  GLOBALYZER ISSUES
+                </div>
+              </div>
+            </div>
+
+            <div className="project-card-measure" data-key="security_rating">
+              <div className="project-card-measure-inner">
+                <div className="project-card-measure-number">
+            <span className="spacer-right">
+              <a href ={link}>{lrm.rci}%</a>
+            </span>
+                </div>
+                <div className="project-card-measure-label-with-icon">
+                  GLOBALYZER RCI
+                </div>
+              </div>
+            </div>
+
+            <div className="project-card-measure" data-key="sqale_rating">
+              <div className="project-card-measure-inner">
+                <div className="project-card-measure-number">
+             <span className="spacer-right">
+              <h5></h5>
+            </span>
+                </div>
+                <div className="project-card-measure-label-with-icon">
+                  LRM AVG COMPLETE
+                </div>
+              </div>
+            </div>
+
+            <div className="project-card-measure" data-key="coverage">
+              <div className="project-card-measure-inner">
+                <div className="project-card-measure-number">
+            <span className="spacer-right">
+              <a href ={reme}>{lrm_rem}</a>
+            </span>
+                </div>
+                <div className="project-card-measure-label">REMEDIATION</div>
+              </div>
+            </div>
+
+          </div>
+      );
+    }else{
+      return (
+          <div className="project-card-measures">
+            <div className="project-card-measure" data-key="reliability_rating">
+              <div className="project-card-measure-inner">
+                <div className="project-card-measure-number">
+            <span className="spacer-right">
+              <a href ={link}>{lrm.issues}</a>
+            </span>
+                </div>
+                <div className="project-card-measure-label-with-icon">
+                  GLOBALYZER ISSUES
+                </div>
+              </div>
+            </div>
+
+            <div className="project-card-measure" data-key="security_rating">
+              <div className="project-card-measure-inner">
+                <div className="project-card-measure-number">
+            <span className="spacer-right">
+              <a href ={link}>{lrm.rci}%</a>
+            </span>
+                </div>
+                <div className="project-card-measure-label-with-icon">
+                  GLOBALYZER RCI
+                </div>
+              </div>
+            </div>
+
+            <div className="project-card-measure" data-key="sqale_rating">
+              <div className="project-card-measure-inner">
+                <div className="project-card-measure-number">
+             <span className="spacer-right">
+              <a href ={lrm_link}>{lrm.comp}%</a>
+            </span>
+                </div>
+                <div className="project-card-measure-label-with-icon">
+                  LRM AVG COMPLETE
+                </div>
+              </div>
+            </div>
+
+            <div className="project-card-measure" data-key="coverage">
+              <div className="project-card-measure-inner">
+                <div className="project-card-measure-number">
+            <span className="spacer-right">
+              <a href ={reme}>{lrm_rem}</a>
+            </span>
+                </div>
+                <div className="project-card-measure-label">REMEDIATION</div>
+              </div>
+            </div>
+
+          </div>
+      );
+    }
+  }
+
+
+
 }

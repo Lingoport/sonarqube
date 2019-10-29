@@ -86,18 +86,18 @@ export class AboutApp extends React.PureComponent<Props, State> {
 
   loadData() {
     Promise.all([this.loadProjects(), this.loadIssues(), this.loadCustomText()]).then(
-      responses => {
-        if (this.mounted) {
-          const [projectsCount, issues] = responses;
-          const issueTypes = keyBy(issues.facet, 'val');
-          this.setState({ projectsCount, issueTypes, loading: false });
+        responses => {
+          if (this.mounted) {
+            const [projectsCount, issues] = responses;
+            const issueTypes = keyBy(issues.facet, 'val');
+            this.setState({ projectsCount, issueTypes, loading: false });
+          }
+        },
+        () => {
+          if (this.mounted) {
+            this.setState({ loading: false });
+          }
         }
-      },
-      () => {
-        if (this.mounted) {
-          this.setState({ loading: false });
-        }
-      }
     );
   }
 
@@ -115,47 +115,53 @@ export class AboutApp extends React.PureComponent<Props, State> {
     }
 
     return (
-      <GlobalContainer location={this.props.location}>
-        <div className="page page-limited about-page" id="about-page">
-          <A11ySkipTarget anchor="about_main" />
+        <GlobalContainer location={this.props.location}>
+          <div className="page page-limited about-page" id="about-page">
+            <A11ySkipTarget anchor="about_main" />
 
-          <div className="about-page-entry">
-            <div className="about-page-intro">
-              <img src="../../../images/lingoport/lingoport_logo.png" width="197" height="50"/>
-              <h1 className="big-spacer-bottom">{translate('layout.sonar.slogan')}</h1>
-              {!this.props.currentUser.isLoggedIn && (
-                <Link className="button button-active big-spacer-right" to="/sessions/new">
-                  {translate('layout.login')}
-                </Link>
-              )}
-              <a
-                className="button"
-                href="https://wiki.lingoport.com/About_Dashboard"
-                rel="noopener noreferrer"
-                target="_blank">
-                {translate('about_page.read_documentation')}
-              </a>
+            <div className="about-page-entry">
+              <div className="about-page-intro">
+                <img src="../../../images/lingoport/lingoport_logo.png" width="197" height="50"/>
+                <h1 className="big-spacer-bottom">{translate('layout.sonar.slogan')}</h1>
+                {!this.props.currentUser.isLoggedIn && (
+                    <Link className="button button-active big-spacer-right" to="/sessions/new">
+                      {translate('layout.login')}
+                    </Link>
+                )}
+                <a
+                    className="button"
+                    href="https://wiki.lingoport.com/About_Dashboard"
+                    rel="noopener noreferrer"
+                    target="_blank">
+                  {translate('about_page.read_documentation')}
+                </a>
+              </div>
+
+              <div className="about-page-instance">
+                <AboutProjects count={projectsCount} loading={loading} />
+                <EntryIssueTypes
+                    bugs={bugs}
+                    codeSmells={codeSmells}
+                    loading={loading}
+                    vulnerabilities={vulnerabilities}
+                />
+              </div>
             </div>
 
-            <div className="about-page-instance">
-              <AboutProjects count={projectsCount} loading={loading} />
-              <EntryIssueTypes
-                bugs={bugs}
-                codeSmells={codeSmells}
-                loading={loading}
-                vulnerabilities={vulnerabilities}
-              />
+            {customText && (
+                <div className="about-page-section" dangerouslySetInnerHTML={{ __html: customText }} />
+            )}
+            <div>
+              <div className="flex-columns">
+                <h4> Welcome to the new Lingoport Dashboard.  Based on customer feedback, we have improved the navigation features and optimized the ease of use.  While the information is largely unchanged, this new layout should be more intuitive, easier to navigate, and more quickly communicate the most relevant information to key stakeholders.  Plus, we have added the gremlin icons to help quickly identify the most common i18n issues. Finally, the dashboard foundation is SonarQube 7.8, so it supports security plugins such as SAML and LDAP.</h4>
+              </div>
             </div>
-          </div>
 
-          {customText && (
-            <div className="about-page-section" dangerouslySetInnerHTML={{ __html: customText }} />
-          )}
 
           </div>
 
 
-      </GlobalContainer>
+        </GlobalContainer>
     );
   }
 }
@@ -172,6 +178,6 @@ const mapStateToProps = (state: Store) => {
 const mapDispatchToProps = { fetchAboutPageSettings } as any;
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(AboutApp);
