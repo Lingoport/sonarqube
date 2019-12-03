@@ -79,7 +79,7 @@ export default class TypeFacet extends React.PureComponent<Props> {
       // type is selected explicitly
       types.includes(type) ||
       // bugs, vulnerabilities and code smells are selected implicitly by default
-      (types.length === 0 && ['BUG', 'VULNERABILITY', 'CODE_SMELL'].includes(type))
+      (types.length === 0 && ['BUG', 'VULNERABILITY'].includes(type))
     );
   }
 
@@ -103,7 +103,7 @@ export default class TypeFacet extends React.PureComponent<Props> {
         value={type}
       />
     );
-  };
+  };// 
 
   render() {
     const { types, stats = {} } = this.props;

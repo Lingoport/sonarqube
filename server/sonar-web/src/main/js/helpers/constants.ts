@@ -24,13 +24,11 @@ export const STATUSES = ['OPEN', 'REOPENED', 'CONFIRMED', 'RESOLVED', 'CLOSED'];
 export const ISSUE_TYPES: T.IssueType[] = [
   'BUG',
   'VULNERABILITY',
-  'CODE_SMELL',
   'SECURITY_HOTSPOT'
 ];
 export const RULE_TYPES: T.RuleType[] = [
   'BUG',
   'VULNERABILITY',
-  'CODE_SMELL',
   'SECURITY_HOTSPOT',
   'UNKNOWN'
 ];

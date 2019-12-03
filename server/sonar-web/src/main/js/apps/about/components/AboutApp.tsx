@@ -148,16 +148,19 @@ export class AboutApp extends React.PureComponent<Props, State> {
               </div>
             </div>
 
-            {customText && (
-                <div className="about-page-section" dangerouslySetInnerHTML={{ __html: customText }} />
-            )}
-            <div>
-              <div className="flex-columns">
-                <h4> Welcome to the new Lingoport Dashboard.  Based on customer feedback, we have improved the navigation features and optimized the ease of use.  While the information is largely unchanged, this new layout should be more intuitive, easier to navigate, and more quickly communicate the most relevant information to key stakeholders.  Plus, we have added the gremlin icons to help quickly identify the most common i18n issues. Finally, the dashboard foundation is SonarQube 7.8, so it supports security plugins such as SAML and LDAP.</h4>
-              </div>
-            </div>
 
-
+          {customText && (
+            <div className="about-page-section" dangerouslySetInnerHTML={{ __html: customText }} />
+          )}
+         <div>
+           <div className="flex-columns">
+               <h3> Welcome to the new Lingoport Dashboard. </h3>
+               <br/>
+              <h5>   Based on customer feedback, we have improved the navigation features and optimized the ease of use.  While the information is largely unchanged, this new layout should be more intuitive, easier to navigate, and more quickly communicate the most relevant information to key stakeholders.
+                  <br/>
+                  Plus, we have added the gremlin icons to help quickly identify the most common i18n issues. Finally, the dashboard foundation is SonarQube 7.8, so it supports security plugins such as SAML and LDAP.</h5>
+           </div>
+         </div>
           </div>
 
 
