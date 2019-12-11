@@ -135,7 +135,7 @@ export class ComponentNavMenu extends React.PureComponent<Props> {
         <Link
           activeClassName="active"
           className={classNames({ active: isIssuesActive })}
-          to={{ pathname: '/project/issues', query: { ...this.getQuery(), resolved: 'false' } }}>
+          to={{ pathname: '/project/issues', query: { ...this.getQuery(), resolved: 'false' ,types:'BUG'} }}>
           {translate('issues.page')}
         </Link>
       </li>

@@ -79,7 +79,7 @@ export default class GlobalNavMenu extends React.PureComponent<Props> {
         <li>
           <Link
             className={classNames({ active })}
-            to={{ pathname: '/issues', query: { resolved: 'false' } }}>
+            to={{ pathname: '/issues', query: { resolved: 'false' , types :'BUG'} }}>
             {translate('my_issues')}
           </Link>
         </li>
@@ -88,8 +88,8 @@ export default class GlobalNavMenu extends React.PureComponent<Props> {
 
     const query =
       this.props.currentUser.isLoggedIn && isMySet()
-        ? { resolved: 'false', myIssues: 'true' }
-        : { resolved: 'false' };
+        ? { resolved: 'false', myIssues: 'true' , types :'BUG'}
+        : { resolved: 'false', types :'BUG' };
     return (
       <li>
         <Link className={classNames({ active })} to={{ pathname: '/issues', query }}>

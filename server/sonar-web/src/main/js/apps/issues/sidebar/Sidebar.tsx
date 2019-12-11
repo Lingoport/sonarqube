@@ -31,7 +31,7 @@ import SeverityFacet from './SeverityFacet';
 import StandardFacet from './StandardFacet';
 import StatusFacet from './StatusFacet';
 import TagFacet from './TagFacet';
-import TypeFacet from './TypeFacet';
+
 import {
   Query,
   Facet,
@@ -110,14 +110,6 @@ export default class Sidebar extends React.PureComponent<Props> {
 
     return (
       <>
-        <TypeFacet
-          fetching={this.props.loadingFacets.types === true}
-          onChange={this.props.onFilterChange}
-          onToggle={this.props.onFacetToggle}
-          open={!!openFacets.types}
-          stats={facets.types}
-          types={query.types}
-        />
         <SeverityFacet
           fetching={this.props.loadingFacets.severities === true}
           onChange={this.props.onFilterChange}

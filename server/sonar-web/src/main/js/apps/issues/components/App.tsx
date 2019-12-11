@@ -137,7 +137,7 @@ export interface State {
   selectedLocationIndex?: number;
 }
 
-const DEFAULT_QUERY = { resolved: 'false' };
+const DEFAULT_QUERY = { resolved: 'false',types:'BUG' };
 
 export class App extends React.PureComponent<Props, State> {
   mounted = false;

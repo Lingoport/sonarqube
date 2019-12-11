@@ -23,11 +23,13 @@ export const SEVERITIES = ['BLOCKER', 'CRITICAL', 'MAJOR', 'MINOR', 'INFO'];
 export const STATUSES = ['OPEN', 'REOPENED', 'CONFIRMED', 'RESOLVED', 'CLOSED'];
 export const ISSUE_TYPES: T.IssueType[] = [
   'BUG',
+  'CODE_SMELL',
   'VULNERABILITY',
   'SECURITY_HOTSPOT'
 ];
 export const RULE_TYPES: T.RuleType[] = [
   'BUG',
+  'CODE_SMELL',
   'VULNERABILITY',
   'SECURITY_HOTSPOT',
   'UNKNOWN'

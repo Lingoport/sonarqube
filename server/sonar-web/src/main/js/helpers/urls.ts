@@ -102,7 +102,7 @@ export function getIssuesUrl(query: Query, organization?: string): Location {
  * Generate URL for a component's issues page
  */
 export function getComponentIssuesUrl(componentKey: string, query?: Query): Location {
-  return { pathname: '/project/issues', query: { ...(query || {}), id: componentKey } };
+  return { pathname: '/project/issues', query: { types:'BUG', id: componentKey } };
 }
 
 /**
@@ -259,7 +259,7 @@ export function getHomePageUrl(homepage: T.HomePage) {
       return '/projects';
     case 'ISSUES':
     case 'MY_ISSUES':
-      return { pathname: '/issues', query: { resolved: 'false' } };
+      return { pathname: '/issues', query: { resolved: 'false' , types :'BUG'} };
   }
 
   // should never happen, but just in case...
