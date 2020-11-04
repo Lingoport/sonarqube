@@ -145,7 +145,7 @@ export default function ProjectCardOverallMeasures({ measures,lrm }: Props){
             </span>
                 </div>
                 <div className="project-card-measure-label-with-icon">
-                  LRM AVG COMPLETE
+                    Localyzer AVG COMPLETE
                 </div>
               </div>
             </div>
